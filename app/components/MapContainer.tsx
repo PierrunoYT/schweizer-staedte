@@ -14,10 +14,13 @@ export default function MapContainer() {
   return (
     <>
       <SidePanel>
-        <ThemeToggle currentTheme={mapTheme} onThemeChange={setMapTheme} />
+        {/* Empty sidebar for now */}
       </SidePanel>
       
-      <div className="ml-80 h-screen bg-white rounded-lg shadow-lg p-6">
+      <div className="ml-80 h-screen bg-white rounded-lg shadow-lg p-6 relative">
+        <div className="absolute top-4 right-4 z-50">
+          <ThemeToggle currentTheme={mapTheme} onThemeChange={setMapTheme} />
+        </div>
         <div className="h-full">
           <Map theme={mapTheme} />
         </div>

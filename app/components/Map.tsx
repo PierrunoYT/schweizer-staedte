@@ -32,12 +32,13 @@ export default function Map({ theme }: MapProps) {
   const tileLayer = getTileLayer()
 
   return (
-    <div className="h-full w-full rounded-lg overflow-hidden border border-gray-200">
+    <div className="h-full w-full rounded-lg overflow-hidden border border-gray-200 relative z-10">
       <MapContainer
         center={[46.8182, 8.2275]} // Center of Switzerland
         zoom={8}
         style={{ height: '100%', width: '100%' }}
         scrollWheelZoom={true}
+        zoomControl={false} // Disable default zoom controls to avoid conflicts
       >
         <TileLayer
           key={theme} // Force re-render when theme changes

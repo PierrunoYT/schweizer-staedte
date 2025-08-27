@@ -13,19 +13,19 @@ export default function ThemeToggle({ currentTheme, onThemeChange }: ThemeToggle
   ]
 
   return (
-    <div>
-      <h3 className="text-lg font-medium text-gray-700 mb-3">Map Theme</h3>
-      <div className="space-y-2">
+    <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-3 border border-gray-200">
+      <div className="flex space-x-1">
         {themes.map((theme) => (
           <button
             key={theme.value}
             type="button"
             onClick={() => onThemeChange(theme.value)}
-            className={`w-full px-4 py-3 text-sm font-medium rounded-lg border transition-colors text-left ${
+            className={`px-3 py-2 text-xs font-medium rounded-md transition-colors ${
               currentTheme === theme.value 
-                ? 'bg-blue-600 text-white border-blue-600' 
-                : 'bg-gray-50 text-gray-900 border-gray-200 hover:bg-gray-100'
+                ? 'bg-blue-600 text-white' 
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
+            title={`Switch to ${theme.label} theme`}
           >
             {theme.label}
           </button>
