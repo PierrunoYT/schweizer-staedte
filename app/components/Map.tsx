@@ -1,4 +1,5 @@
 'use client'
+import { useEffect, useState, forwardRef, useImperativeHandle, useRef } from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 
@@ -8,7 +9,28 @@ interface MapProps {
   theme: MapTheme
 }
 
-export default function Map({ theme }: MapProps) {
+const Map = forwardRef<any, MapProps>(({ theme }, ref) => {
+  const [isClient, setIsClient] = useState(false)
+  const mapRef = useRef<any>(null)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  useImperativeHandle(ref, () => ({
+    setZoom: (zoom: number) => {
+      if (mapRef.current) {
+        mapRef.current.setZoom(zoom)
+      }
+    },
+    getZoom: () => {
+      if (mapRef.current) {
+        return mapRef.current.getZoom()
+      }
+      return 8
+    }
+  }))
+
   const getTileLayer = () => {
     switch (theme) {
       case 'light':
@@ -31,9 +53,18 @@ export default function Map({ theme }: MapProps) {
 
   const tileLayer = getTileLayer()
 
+  if (!isClient) {
+    return (
+      <div className="h-full w-full rounded-lg border border-gray-200 bg-gray-100 flex items-center justify-center">
+        <div className="text-gray-500">Loading map...</div>
+      </div>
+    )
+  }
+
   return (
     <div className="h-full w-full rounded-lg overflow-hidden border border-gray-200 relative z-10">
       <MapContainer
+        ref={mapRef}
         center={[46.8182, 8.2275]} // Center of Switzerland
         zoom={8}
         style={{ height: '100%', width: '100%' }}
@@ -48,4 +79,8 @@ export default function Map({ theme }: MapProps) {
       </MapContainer>
     </div>
   )
-}
+})
+
+Map.displayName = 'Map'
+
+export default Map
