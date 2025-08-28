@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState, forwardRef, useImperativeHandle, useRef } from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
+import { Map as LeafletMap } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
 type MapTheme = 'neutral' | 'light' | 'dark'
@@ -9,9 +10,14 @@ interface MapProps {
   theme: MapTheme
 }
 
-const Map = forwardRef<any, MapProps>(({ theme }, ref) => {
+interface MapRef {
+  setZoom: (zoom: number) => void
+  getZoom: () => number
+}
+
+const Map = forwardRef<MapRef, MapProps>(({ theme }, ref) => {
   const [isClient, setIsClient] = useState(false)
-  const mapRef = useRef<any>(null)
+  const mapRef = useRef<LeafletMap>(null)
 
   useEffect(() => {
     setIsClient(true)

@@ -9,9 +9,14 @@ type MapTheme = 'neutral' | 'light' | 'dark'
 
 const Map = dynamic(() => import('./Map'), { ssr: false })
 
+interface MapRef {
+  setZoom: (zoom: number) => void
+  getZoom: () => number
+}
+
 export default function MapContainer() {
   const [mapTheme, setMapTheme] = useState<MapTheme>('neutral')
-  const mapRef = useRef<any>(null)
+  const mapRef = useRef<MapRef>(null)
 
   const handleZoomIn = () => {
     if (mapRef.current) {
@@ -28,6 +33,7 @@ export default function MapContainer() {
   return (
     <>
       <SidePanel>
+        <></>
         {/* Empty sidebar for now */}
       </SidePanel>
       
