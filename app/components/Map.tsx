@@ -2,6 +2,7 @@
 import { useEffect, useState, forwardRef, useImperativeHandle, useRef } from 'react'
 import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import { Map as LeafletMap } from 'leaflet'
+import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
 type MapTheme = 'neutral' | 'light' | 'dark'
@@ -72,29 +73,28 @@ const Map = forwardRef<MapRef, MapProps>(({ theme }, ref) => {
 
   const tileLayer = getTileLayer()
 
-  const getQuartierStyle = () => {
-    switch (theme) {
-      case 'dark':
-        return {
-          color: '#60a5fa',
-          weight: 2,
-          fillColor: '#1e40af',
-          fillOpacity: 0.2
-        }
-      case 'light':
-        return {
-          color: '#2563eb',
-          weight: 2,
-          fillColor: '#3b82f6',
-          fillOpacity: 0.1
-        }
-      default:
-        return {
-          color: '#1d4ed8',
-          weight: 2,
-          fillColor: '#2563eb',
-          fillOpacity: 0.15
-        }
+  const getQuartierColors = () => {
+    // 27 highly distinct colors - same for all themes to maintain consistency
+    return [
+      '#e6194b', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#46f0f0', '#f032e6',
+      '#bcf60c', '#fabebe', '#008080', '#e6beff', '#9a6324', '#fffac8', '#800000', '#aaffc3',
+      '#808000', '#ffd8b1', '#000075', '#808080', '#ff4500', '#1e90ff', '#daa520', '#32cd32',
+      '#ff69b4', '#8b4513', '#2f4f4f'
+    ]
+  }
+
+  const getQuartierStyle = (feature: any) => {
+    const colors = getQuartierColors()
+    const quartierNr = feature?.properties?.QUARTIERNR || 0
+    const colorIndex = (quartierNr - 1) % colors.length
+    
+    const baseOpacity = theme === 'dark' ? 0.3 : 0.2
+    
+    return {
+      color: colors[colorIndex],
+      weight: 2,
+      fillColor: colors[colorIndex],
+      fillOpacity: baseOpacity
     }
   }
 
@@ -125,20 +125,66 @@ const Map = forwardRef<MapRef, MapProps>(({ theme }, ref) => {
           <GeoJSON
             key={`${theme}-geojson`}
             data={quartierData}
-            style={getQuartierStyle()}
+            style={getQuartierStyle}
             onEachFeature={(feature, layer) => {
               if (feature.properties) {
+                // Add popup
                 layer.bindPopup(`
                   <div>
                     <h3 style="margin: 0 0 8px 0; font-weight: bold;">
-                      ${feature.properties.Name || feature.properties.name || 'Quartier'}
+                      ${feature.properties.QNAME || 'Quartier'}
                     </h3>
-                    ${Object.entries(feature.properties)
-                      .filter(([key]) => key.toLowerCase() !== 'name')
-                      .map(([key, value]) => `<p style="margin: 2px 0;"><strong>${key}:</strong> ${value}</p>`)
-                      .join('')}
+                    <p style="margin: 2px 0;"><strong>Quartier Nr:</strong> ${feature.properties.QUARTIERNR || 'N/A'}</p>
+                    <p style="margin: 2px 0;"><strong>Area:</strong> ${Math.round(feature.properties.Shape_Area || 0)} m²</p>
                   </div>
                 `)
+
+                // Add text label
+                if (feature.geometry && feature.geometry.type === 'Polygon') {
+                  const bounds = layer.getBounds()
+                  const center = bounds.getCenter()
+                  const quartierName = feature.properties.QNAME || 'Quartier'
+                  
+                  // Split long names into multiple lines
+                  const words = quartierName.split(/[\s\/]+/)
+                  let displayName = quartierName
+                  if (words.length > 1) {
+                    displayName = words.join('<br>')
+                  }
+                  
+                  // Calculate area to determine font size
+                  const area = feature.properties.Shape_Area || 0
+                  const fontSize = area > 1000000 ? 12 : area > 500000 ? 10 : 9
+                  
+                  // Create text label
+                  const textColor = theme === 'dark' ? '#ffffff' : '#000000'
+                  const textShadow = theme === 'dark' ? '2px 2px 4px rgba(0,0,0,0.9)' : '2px 2px 4px rgba(255,255,255,0.9)'
+                  
+                  const textMarker = L.divIcon({
+                    html: `<div style="
+                      font-size: ${fontSize}px;
+                      font-weight: bold;
+                      color: ${textColor};
+                      text-shadow: ${textShadow};
+                      text-align: center;
+                      pointer-events: none;
+                      line-height: 1.1;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      width: 100%;
+                      height: 100%;
+                    ">${displayName}</div>`,
+                    className: 'quartier-label',
+                    iconSize: [150, 40],
+                    iconAnchor: [75, 20]
+                  })
+
+                  const marker = L.marker(center, { icon: textMarker })
+                  if (mapRef.current) {
+                    marker.addTo(mapRef.current)
+                  }
+                }
               }
             }}
           />
