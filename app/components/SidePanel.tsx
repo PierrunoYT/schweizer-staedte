@@ -143,11 +143,33 @@ export default function SidePanel() {
                 <span className="text-gray-700 dark:text-gray-300">Stadt Luzern (clickable)</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 border-2 border-blue-500 bg-blue-500/20 rounded"></div>
-                <span className="text-gray-700 dark:text-gray-300">City quarters/districts</span>
+                <div className="flex gap-1">
+                  <div className="w-3 h-3 border border-orange-400 bg-orange-400/30 rounded-sm"></div>
+                  <div className="w-3 h-3 border border-blue-400 bg-blue-400/30 rounded-sm"></div>
+                  <div className="w-3 h-3 border border-green-400 bg-green-400/30 rounded-sm"></div>
+                </div>
+                <span className="text-gray-700 dark:text-gray-300">City quarters (27 total, toggleable)</span>
               </div>
-              <div className="text-xs text-gray-500 dark:text-gray-400 mt-2 p-2 bg-gray-100 dark:bg-gray-800/50 rounded">
-                💡 <strong>Tip:</strong> Click the red marker for detailed city information, or use map controls (bottom-left) to toggle quarters and themes.
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 border-2 border-blue-500 bg-transparent rounded" style={{borderStyle: 'dashed'}}></div>
+                <span className="text-gray-700 dark:text-gray-300">Municipality boundaries</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 bg-gray-600 dark:bg-gray-400 rounded-sm"></div>
+                <span className="text-gray-700 dark:text-gray-300">Quarter names (toggleable)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="flex gap-1">
+                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                </div>
+                <span className="text-gray-700 dark:text-gray-300">Quarter color themes (population, density, etc.)</span>
+              </div>
+              <div className="text-xs text-gray-500 dark:text-gray-400 mt-3 p-2 bg-gray-100 dark:bg-gray-800/50 rounded">
+                💡 <strong>Tip:</strong> Click the red marker for detailed city information, or use map controls (bottom-left) to toggle quarters, names, and themes.
               </div>
             </div>
           </div>
