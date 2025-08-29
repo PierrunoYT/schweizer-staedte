@@ -11,6 +11,7 @@ type MapTheme = 'neutral' | 'light' | 'dark'
 interface MapProps {
   theme: MapTheme
   showQuarters: boolean
+  showMunicipalities: boolean
 }
 
 interface MapRef {
@@ -19,10 +20,11 @@ interface MapRef {
   panTo: (coordinates: [number, number], zoom?: number) => void
 }
 
-const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters }, ref) => {
+const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showMunicipalities }, ref) => {
   const [isClient, setIsClient] = useState(false)
   const [mapReady, setMapReady] = useState(false)
   const [quartierData, setQuartierData] = useState(null)
+  const [municipalityData, setMunicipalityData] = useState(null)
   const mapRef = useRef<LeafletMap>(null)
   const markersRef = useRef<L.Marker[]>([]) // Quarter markers
 
@@ -40,12 +42,27 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters }, ref) => {
         console.log('Quartier data loaded successfully')
       } catch (error) {
         console.warn('Quartier data not available - quarters will be disabled:', error)
-        // Don't throw error, just continue without quartier data
         setQuartierData(null)
+      }
+    }
+
+    const loadMunicipalityData = async () => {
+      try {
+        const response = await fetch('/municipalities-luzern.geojson')
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        const data = await response.json()
+        setMunicipalityData(data)
+        console.log('Municipality data loaded successfully')
+      } catch (error) {
+        console.warn('Municipality data not available - boundaries disabled:', error)
+        setMunicipalityData(null)
       }
     }
     
     loadQuartierData()
+    loadMunicipalityData()
   }, [])
 
   useEffect(() => {
@@ -260,6 +277,33 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters }, ref) => {
                 url={tileLayer.url}
                 attribution={tileLayer.attribution}
               />
+              {municipalityData && showMunicipalities && (
+                <GeoJSON
+                  key={`${theme}-municipalities`}
+                  data={municipalityData}
+                  style={{
+                    color: '#2563eb',
+                    weight: 2,
+                    fillColor: 'transparent',
+                    fillOpacity: 0,
+                    dashArray: '8,4',
+                    interactive: true
+                  }}
+                  onEachFeature={(feature, layer) => {
+                    if (feature.properties) {
+                      layer.bindPopup(`
+                        <div>
+                          <h3 style="margin: 0 0 8px 0; font-weight: bold;">
+                            ${feature.properties.NAME || feature.properties.GEMEINDE || 'Municipality'}
+                          </h3>
+                          <p style="margin: 2px 0;"><strong>Type:</strong> Municipality Boundary</p>
+                          ${feature.properties.BFS_NR ? `<p style="margin: 2px 0;"><strong>BFS Nr:</strong> ${feature.properties.BFS_NR}</p>` : ''}
+                        </div>
+                      `)
+                    }
+                  }}
+                />
+              )}
               {quartierData && showQuarters && (
                 <GeoJSON
                   key={`${theme}-${showQuarters}-geojson`}

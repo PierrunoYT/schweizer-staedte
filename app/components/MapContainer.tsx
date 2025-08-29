@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import SidePanel from './SidePanel'
 import ThemeToggle from './ThemeToggle'
 import QuarterToggle from './QuarterToggle'
+import MunicipalityToggle from './MunicipalityToggle'
 import ZoomControls from './ZoomControls'
 import MapControlsDropdown from './MapControlsDropdown'
 
@@ -20,6 +21,7 @@ interface MapRef {
 export default function MapContainer() {
   const [mapTheme, setMapTheme] = useState<MapTheme>('neutral')
   const [showQuarters, setShowQuarters] = useState(true)
+  const [showMunicipalities, setShowMunicipalities] = useState(true)
   const mapRef = useRef<MapRef>(null)
 
 
@@ -51,6 +53,13 @@ export default function MapContainer() {
         <QuarterToggle showQuarters={showQuarters} onToggle={setShowQuarters} />
       </div>
       
+      <div>
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-xs font-medium text-gray-700 dark:text-gray-300">🏛️ Municipalities</span>
+        </div>
+        <MunicipalityToggle showMunicipalities={showMunicipalities} onToggle={setShowMunicipalities} />
+      </div>
+      
       <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
         <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
           <span className="font-medium">App Theme:</span> Use header toggle (top-right)
@@ -71,7 +80,7 @@ export default function MapContainer() {
             <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
           </div>
           <MapControlsDropdown mapControls={mapControls} theme={mapTheme} />
-          <Map theme={mapTheme} showQuarters={showQuarters} ref={mapRef} />
+          <Map theme={mapTheme} showQuarters={showQuarters} showMunicipalities={showMunicipalities} ref={mapRef} />
         </div>
       </div>
     </div>

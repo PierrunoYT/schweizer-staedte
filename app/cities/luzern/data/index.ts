@@ -7,7 +7,8 @@ export interface LuzernStats {
   averageIncome: number // in CHF
   housingCost: number // average rent per m² in CHF
   taxRate: number // municipal tax rate percentage
-  founded?: number // year founded
+  founded?: number // year city rights granted
+  bfsNumber: number // BFS municipality number (official federal statistics identifier)
   languages: string[] // official languages
   districts: string[] // city districts/quarters
   economicSectors: string[] // main economic activities
@@ -146,7 +147,8 @@ export const luzernCity: LuzernCity = {
     averageIncome: 75000,
     housingCost: 18.50,
     taxRate: 20.9,
-    founded: 840,
+    founded: 1178, // Official city rights granted (Stadtrechte)
+    bfsNumber: 1061, // Official BFS municipality number
     languages: ['German'],
     districts: [
       'Altstadt',

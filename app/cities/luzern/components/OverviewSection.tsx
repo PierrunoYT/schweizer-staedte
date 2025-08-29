@@ -19,7 +19,23 @@ export default function OverviewSection() {
         </div>
         <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-lg border border-orange-200 dark:border-orange-800/30">
           <div className="text-2xl font-bold text-orange-900 dark:text-orange-100">{luzernCity.stats.founded}</div>
-          <div className="text-sm text-orange-800 dark:text-orange-200">Gegründet</div>
+          <div className="text-sm text-orange-800 dark:text-orange-200">Stadtrechte</div>
+        </div>
+      </div>
+
+      {/* Additional Administrative Information */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+          <div className="text-lg font-bold text-gray-900 dark:text-gray-100">BFS-Nr. {luzernCity.stats.bfsNumber}</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Offizielle Gemeindenummer</div>
+        </div>
+        <div className="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+          <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{luzernCity.postalCode}</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Postleitzahl</div>
+        </div>
+        <div className="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+          <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{luzernCity.stats.elevation}m ü.M.</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">Höhe Zentrum</div>
         </div>
       </div>
 
