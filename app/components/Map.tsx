@@ -24,8 +24,8 @@ interface MapRef {
 const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterNames, showMunicipalities }, ref) => {
   const [isClient, setIsClient] = useState(false)
   const [mapReady, setMapReady] = useState(false)
-  const [quartierData, setQuartierData] = useState<{ features?: Array<{ properties?: { QNAME?: string; Shape_Area?: number; QUARTIERNR?: number }; geometry?: { type: string; coordinates: number[][][] } }> } | null>(null)
-  const [municipalityData, setMunicipalityData] = useState<{ features?: Array<{ properties?: { NAME?: string; GEMEINDE?: string; BFS_NR?: string }; geometry?: { type: string; coordinates: number[][][] } }> } | null>(null)
+  const [quartierData, setQuartierData] = useState<any>(null)
+  const [municipalityData, setMunicipalityData] = useState<any>(null)
   const [mapInstance, setMapInstance] = useState<string>(() => `map-${Date.now()}`)
   const mapRef = useRef<LeafletMap>(null)
   const markersRef = useRef<L.Marker[]>([]) // Quarter markers
@@ -113,8 +113,8 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterName
               const coordinates = feature.geometry.coordinates[0]
               let minLat = Infinity, maxLat = -Infinity, minLng = Infinity, maxLng = -Infinity
               
-              coordinates.forEach((coord: number[]) => {
-                const [lng, lat] = coord as [number, number]
+              coordinates.forEach((coord: any) => {
+                const [lng, lat] = coord
                 minLat = Math.min(minLat, lat)
                 maxLat = Math.max(maxLat, lat)
                 minLng = Math.min(minLng, lng)
@@ -231,7 +231,7 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterName
     ]
   }
 
-  const getQuartierStyle = (feature: { properties?: { QUARTIERNR?: number } }) => {
+  const getQuartierStyle = (feature: any) => {
     const colors = getQuartierColors()
     const quartierNr = feature?.properties?.QUARTIERNR || 0
     const colorIndex = (quartierNr - 1) % colors.length
