@@ -105,19 +105,15 @@ export default function MapContainer() {
   return (
     <div className="flex h-[calc(100vh-73px)]">
       <SidePanel>
-        <></>
-        {/* Empty sidebar for now */}
+        <SearchBar 
+          onCitySelect={handleCitySelect} 
+          onAddressSelect={handleAddressSelect}
+          onSearch={handleSearch} 
+        />
       </SidePanel>
       
       <div className="flex-1 bg-white rounded-lg shadow-lg p-6 relative">
-        <div className="mb-4">
-          <SearchBar 
-            onCitySelect={handleCitySelect} 
-            onAddressSelect={handleAddressSelect}
-            onSearch={handleSearch} 
-          />
-        </div>
-        <div className="h-[calc(100%-4rem)] relative">
+        <div className="h-full relative">
           <div className="absolute bottom-2 left-2 z-50">
             <ThemeToggle currentTheme={mapTheme} onThemeChange={setMapTheme} />
           </div>
