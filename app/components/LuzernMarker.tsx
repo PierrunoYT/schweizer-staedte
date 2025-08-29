@@ -268,42 +268,10 @@ export default function LuzernMarker({
       }
     })
 
-    // Add click handler with detailed information
+    // Click handler - no popup needed since we have hover tooltip with details link
     marker.on('click', () => {
-      const popupContent = `
-        <div style="font-family: system-ui, sans-serif; min-width: 250px;">
-          <h3 style="margin: 0 0 12px 0; color: #DC2626; font-size: 16px; font-weight: 600;">
-            🏛️ Luzern
-          </h3>
-          <div style="space-y: 8px;">
-            <div style="margin-bottom: 8px;">
-              <strong>📍 Koordinaten:</strong><br>
-              <span style="font-size: 12px; color: #666;">
-                WGS84: ${coordinates[0].toFixed(6)}°N, ${coordinates[1].toFixed(6)}°E<br>
-                CH1903/LV95: ${LUZERN_COORDINATES.ch1903[0]} / ${LUZERN_COORDINATES.ch1903[1]}
-              </span>
-            </div>
-            <div style="margin-bottom: 8px;">
-              <strong>🏙️ Stadtkern:</strong><br>
-              <span style="font-size: 12px; color: #666;">
-                Zentrale Lage im Herzen der Stadt Luzern
-              </span>
-            </div>
-            <div style="margin-bottom: 8px;">
-              <strong>📊 Grunddaten:</strong><br>
-              <span style="font-size: 12px; color: #666;">
-                Höhe: 436m ü.M. • Einwohner: 82,257<br>
-                Fläche: 37.4 km² • Gegründet: 840 n.Chr.
-              </span>
-            </div>
-          </div>
-        </div>
-      `
-      
-      marker.bindPopup(popupContent, {
-        maxWidth: 300,
-        className: 'luzern-popup'
-      }).openPopup()
+      // Navigate directly to details page on click
+      window.location.href = '/cities/luzern'
     })
 
     marker.addTo(map)
