@@ -40,7 +40,17 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters }, ref) => {
   }, [])
 
   useEffect(() => {
-    // Clear all markers when component unmounts or dependencies change
+    // Immediately clear markers when quarters are hidden
+    if (!showQuarters && mapRef.current) {
+      markersRef.current.forEach(marker => {
+        mapRef.current?.removeLayer(marker)
+      })
+      markersRef.current = []
+    }
+  }, [showQuarters])
+
+  useEffect(() => {
+    // Clear all markers when theme changes
     return () => {
       if (mapRef.current) {
         markersRef.current.forEach(marker => {
@@ -49,77 +59,88 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters }, ref) => {
         markersRef.current = []
       }
     }
-  }, [showQuarters, theme])
+  }, [theme])
 
   useEffect(() => {
     // Add quarter name markers when data is available and quarters should be shown
     if (mapRef.current && quartierData && showQuarters && isClient) {
-      // Clear existing markers first
-      markersRef.current.forEach(marker => {
-        mapRef.current?.removeLayer(marker)
-      })
-      markersRef.current = []
-
-      // Add new markers
-      if (quartierData.features) {
-        quartierData.features.forEach((feature: any) => {
-          if (feature.properties && feature.geometry && feature.geometry.type === 'Polygon') {
-            // Calculate bounds manually for polygon
-            const coordinates = feature.geometry.coordinates[0]
-            let minLat = Infinity, maxLat = -Infinity, minLng = Infinity, maxLng = -Infinity
-            
-            coordinates.forEach((coord: [number, number]) => {
-              const [lng, lat] = coord
-              minLat = Math.min(minLat, lat)
-              maxLat = Math.max(maxLat, lat)
-              minLng = Math.min(minLng, lng)
-              maxLng = Math.max(maxLng, lng)
-            })
-            
-            const center = L.latLng((minLat + maxLat) / 2, (minLng + maxLng) / 2)
-            const quartierName = feature.properties.QNAME || 'Quartier'
-            
-            // Split long names into multiple lines
-            const words = quartierName.split(/[\s\/]+/)
-            let displayName = quartierName
-            if (words.length > 1) {
-              displayName = words.join('<br>')
-            }
-            
-            // Calculate area to determine font size
-            const area = feature.properties.Shape_Area || 0
-            const fontSize = area > 1000000 ? 12 : area > 500000 ? 10 : 9
-            
-            // Create text label
-            const textColor = theme === 'dark' ? '#ffffff' : '#000000'
-            const textShadow = theme === 'dark' ? '2px 2px 4px rgba(0,0,0,0.9)' : '2px 2px 4px rgba(255,255,255,0.9)'
-            
-            const textMarker = L.divIcon({
-              html: `<div style="
-                font-size: ${fontSize}px;
-                font-weight: bold;
-                color: ${textColor};
-                text-shadow: ${textShadow};
-                text-align: center;
-                pointer-events: none;
-                line-height: 1.1;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                height: 100%;
-              ">${displayName}</div>`,
-              className: 'quartier-label',
-              iconSize: [150, 40],
-              iconAnchor: [75, 20]
-            })
-
-            const marker = L.marker(center, { icon: textMarker })
-            marker.addTo(mapRef.current)
-            markersRef.current.push(marker)
+      // Add a small delay to ensure the map is fully initialized
+      const timeoutId = setTimeout(() => {
+        if (!mapRef.current) return
+        
+        // Clear existing markers first
+        markersRef.current.forEach(marker => {
+          if (mapRef.current) {
+            mapRef.current.removeLayer(marker)
           }
         })
-      }
+        markersRef.current = []
+
+        // Add new markers
+        if (quartierData.features) {
+          quartierData.features.forEach((feature: any) => {
+            if (feature.properties && feature.geometry && feature.geometry.type === 'Polygon') {
+              // Calculate bounds manually for polygon
+              const coordinates = feature.geometry.coordinates[0]
+              let minLat = Infinity, maxLat = -Infinity, minLng = Infinity, maxLng = -Infinity
+              
+              coordinates.forEach((coord: [number, number]) => {
+                const [lng, lat] = coord
+                minLat = Math.min(minLat, lat)
+                maxLat = Math.max(maxLat, lat)
+                minLng = Math.min(minLng, lng)
+                maxLng = Math.max(maxLng, lng)
+              })
+              
+              const center = L.latLng((minLat + maxLat) / 2, (minLng + maxLng) / 2)
+              const quartierName = feature.properties.QNAME || 'Quartier'
+              
+              // Split long names into multiple lines
+              const words = quartierName.split(/[\s\/]+/)
+              let displayName = quartierName
+              if (words.length > 1) {
+                displayName = words.join('<br>')
+              }
+              
+              // Calculate area to determine font size
+              const area = feature.properties.Shape_Area || 0
+              const fontSize = area > 1000000 ? 12 : area > 500000 ? 10 : 9
+              
+              // Create text label
+              const textColor = theme === 'dark' ? '#ffffff' : '#000000'
+              const textShadow = theme === 'dark' ? '2px 2px 4px rgba(0,0,0,0.9)' : '2px 2px 4px rgba(255,255,255,0.9)'
+              
+              const textMarker = L.divIcon({
+                html: `<div style="
+                  font-size: ${fontSize}px;
+                  font-weight: bold;
+                  color: ${textColor};
+                  text-shadow: ${textShadow};
+                  text-align: center;
+                  pointer-events: none;
+                  line-height: 1.1;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 100%;
+                  height: 100%;
+                ">${displayName}</div>`,
+                className: 'quartier-label',
+                iconSize: [150, 40],
+                iconAnchor: [75, 20]
+              })
+
+              const marker = L.marker(center, { icon: textMarker })
+              if (mapRef.current) {
+                marker.addTo(mapRef.current)
+                markersRef.current.push(marker)
+              }
+            }
+          })
+        }
+      }, 100)
+
+      return () => clearTimeout(timeoutId)
     }
   }, [quartierData, showQuarters, theme, isClient])
 

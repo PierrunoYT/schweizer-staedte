@@ -44,7 +44,7 @@ export default function MapContainer() {
           <div className="absolute bottom-2 left-2 z-50">
             <ThemeToggle currentTheme={mapTheme} onThemeChange={setMapTheme} />
           </div>
-          <div className="absolute bottom-2 left-44 z-50">
+          <div className="absolute top-2 left-2 z-50">
             <QuarterToggle showQuarters={showQuarters} onToggle={setShowQuarters} />
           </div>
           <div className="absolute top-2 right-2 z-50">
