@@ -112,6 +112,7 @@ export default function SidePanel() {
             </div>
           </div>
 
+
           {/* Map Legend */}
           <div>
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">

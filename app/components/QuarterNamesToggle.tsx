@@ -1,22 +1,22 @@
 'use client'
 
-interface MunicipalityToggleProps {
-  showMunicipalities: boolean
+interface QuarterNamesToggleProps {
+  showQuarterNames: boolean
   onToggle: (show: boolean) => void
 }
 
-export default function MunicipalityToggle({ showMunicipalities, onToggle }: MunicipalityToggleProps) {
+export default function QuarterNamesToggle({ showQuarterNames, onToggle }: QuarterNamesToggleProps) {
   return (
     <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-3 border border-gray-200">
       <button
-        onClick={() => onToggle(!showMunicipalities)}
+        onClick={() => onToggle(!showQuarterNames)}
         className={`w-full px-3 py-2 text-xs font-medium rounded-md transition-colors ${
-          showMunicipalities 
-            ? 'bg-blue-600 text-white' 
+          showQuarterNames 
+            ? 'bg-green-600 text-white' 
             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
         }`}
       >
-        {showMunicipalities ? 'Hide Boundaries' : 'Show Boundaries'}
+        {showQuarterNames ? 'Hide Names' : 'Show Names'}
       </button>
     </div>
   )

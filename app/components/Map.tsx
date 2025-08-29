@@ -11,6 +11,7 @@ type MapTheme = 'neutral' | 'light' | 'dark'
 interface MapProps {
   theme: MapTheme
   showQuarters: boolean
+  showQuarterNames: boolean
   showMunicipalities: boolean
 }
 
@@ -20,7 +21,7 @@ interface MapRef {
   panTo: (coordinates: [number, number], zoom?: number) => void
 }
 
-const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showMunicipalities }, ref) => {
+const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterNames, showMunicipalities }, ref) => {
   const [isClient, setIsClient] = useState(false)
   const [mapReady, setMapReady] = useState(false)
   const [quartierData, setQuartierData] = useState(null)
@@ -66,14 +67,14 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showMunicipalit
   }, [])
 
   useEffect(() => {
-    // Immediately clear markers when quarters are hidden
-    if (!showQuarters && mapRef.current) {
+    // Immediately clear markers when quarter names are hidden
+    if (!showQuarterNames && mapRef.current) {
       markersRef.current.forEach(marker => {
         mapRef.current?.removeLayer(marker)
       })
       markersRef.current = []
     }
-  }, [showQuarters])
+  }, [showQuarterNames])
 
   useEffect(() => {
     // Clear all markers when theme changes
@@ -88,8 +89,8 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showMunicipalit
   }, [theme])
 
   useEffect(() => {
-    // Add quarter name markers when data is available and quarters should be shown
-    if (mapRef.current && quartierData && showQuarters && isClient) {
+    // Add quarter name markers when data is available and quarter names should be shown
+    if (mapRef.current && quartierData && showQuarterNames && isClient) {
       // Add a small delay to ensure the map is fully initialized
       const timeoutId = setTimeout(() => {
         if (!mapRef.current) return
@@ -168,7 +169,7 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showMunicipalit
 
       return () => clearTimeout(timeoutId)
     }
-  }, [quartierData, showQuarters, theme, isClient])
+  }, [quartierData, showQuarterNames, theme, isClient])
 
 
   useImperativeHandle(ref, () => ({

@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import SidePanel from './SidePanel'
 import ThemeToggle from './ThemeToggle'
 import QuarterToggle from './QuarterToggle'
+import QuarterNamesToggle from './QuarterNamesToggle'
 import MunicipalityToggle from './MunicipalityToggle'
 import ZoomControls from './ZoomControls'
 import MapControlsDropdown from './MapControlsDropdown'
@@ -21,6 +22,7 @@ interface MapRef {
 export default function MapContainer() {
   const [mapTheme, setMapTheme] = useState<MapTheme>('neutral')
   const [showQuarters, setShowQuarters] = useState(true)
+  const [showQuarterNames, setShowQuarterNames] = useState(true)
   const [showMunicipalities, setShowMunicipalities] = useState(true)
   const mapRef = useRef<MapRef>(null)
 
@@ -50,7 +52,10 @@ export default function MapContainer() {
         <div className="flex items-center justify-between mb-2">
           <span className="text-xs font-medium text-gray-700 dark:text-gray-300">🏘️ Quarters</span>
         </div>
-        <QuarterToggle showQuarters={showQuarters} onToggle={setShowQuarters} />
+        <div className="space-y-2">
+          <QuarterToggle showQuarters={showQuarters} onToggle={setShowQuarters} />
+          <QuarterNamesToggle showQuarterNames={showQuarterNames} onToggle={setShowQuarterNames} />
+        </div>
       </div>
       
       <div>
@@ -80,7 +85,7 @@ export default function MapContainer() {
             <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
           </div>
           <MapControlsDropdown mapControls={mapControls} theme={mapTheme} />
-          <Map theme={mapTheme} showQuarters={showQuarters} showMunicipalities={showMunicipalities} ref={mapRef} />
+          <Map theme={mapTheme} showQuarters={showQuarters} showQuarterNames={showQuarterNames} showMunicipalities={showMunicipalities} ref={mapRef} />
         </div>
       </div>
     </div>
