@@ -112,6 +112,25 @@ export default function SidePanel() {
             </div>
           </div>
 
+          {/* Switzerland Location */}
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+              <span>🇨🇭</span> Location in Switzerland
+            </h3>
+            <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4 flex items-center justify-center">
+              <img 
+                src="/switzerland.svg" 
+                alt="Switzerland" 
+                className="h-16 flex-shrink-0 opacity-90"
+                style={{ display: 'block', objectFit: 'contain' }}
+              />
+            </div>
+            <div className="mt-2 text-center">
+              <div className="text-xs text-gray-600 dark:text-gray-400">
+                Switzerland outline - Luzern located in central region
+              </div>
+            </div>
+          </div>
 
           {/* Map Legend */}
           <div>
