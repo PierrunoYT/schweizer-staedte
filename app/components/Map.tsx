@@ -214,7 +214,7 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters }, ref) => {
   }
 
   return (
-    <div className="h-full w-full rounded-lg overflow-hidden border border-gray-200 relative z-10">
+    <div className="h-full w-full rounded-lg overflow-hidden border border-gray-200 relative z-0">
       <MapContainer
         ref={mapRef}
         center={[47.0502, 8.3093]} // Center of Lucerne area  

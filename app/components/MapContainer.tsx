@@ -33,13 +33,13 @@ export default function MapContainer() {
   }
 
   return (
-    <>
+    <div className="flex h-[calc(100vh-73px)]">
       <SidePanel>
         <></>
         {/* Empty sidebar for now */}
       </SidePanel>
       
-      <div className="ml-80 h-screen bg-white rounded-lg shadow-lg p-6 relative">
+      <div className="flex-1 bg-white rounded-lg shadow-lg p-6 relative">
         <div className="h-full relative">
           <div className="absolute bottom-2 left-2 z-50">
             <ThemeToggle currentTheme={mapTheme} onThemeChange={setMapTheme} />
@@ -53,6 +53,6 @@ export default function MapContainer() {
           <Map theme={mapTheme} showQuarters={showQuarters} ref={mapRef} />
         </div>
       </div>
-    </>
+    </div>
   )
 }
