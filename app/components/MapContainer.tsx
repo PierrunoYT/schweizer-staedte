@@ -125,16 +125,24 @@ export default function MapContainer() {
     <div className="space-y-3">
       <div>
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-medium text-gray-700">🎨 Theme</span>
+          <span className="text-xs font-medium text-gray-700 dark:text-gray-300">🗺️ Map Style</span>
         </div>
         <ThemeToggle currentTheme={mapTheme} onThemeChange={setMapTheme} />
       </div>
       
       <div>
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-medium text-gray-700">🏘️ Quarters</span>
+          <span className="text-xs font-medium text-gray-700 dark:text-gray-300">🏘️ Quarters</span>
         </div>
         <QuarterToggle showQuarters={showQuarters} onToggle={setShowQuarters} />
+      </div>
+      
+      <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+        <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+          <span className="font-medium">App Theme:</span> Use header toggle (top-right)
+          <br />
+          <span className="font-medium">Map Style:</span> Choose map appearance above
+        </p>
       </div>
     </div>
   )
@@ -149,7 +157,7 @@ export default function MapContainer() {
         />
       </SidePanel>
       
-      <div className="flex-1 bg-white rounded-lg shadow-lg p-6 relative">
+      <div className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 relative transition-colors duration-200">
         <div className="h-full relative">
           <div className="absolute top-2 right-2 z-50">
             <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
