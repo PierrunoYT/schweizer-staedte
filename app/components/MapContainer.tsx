@@ -102,9 +102,27 @@ export default function MapContainer() {
     }
   }
 
+  const mapControls = (
+    <div className="space-y-3">
+      <div>
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-xs font-medium text-gray-700">🎨 Theme</span>
+        </div>
+        <ThemeToggle currentTheme={mapTheme} onThemeChange={setMapTheme} />
+      </div>
+      
+      <div>
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-xs font-medium text-gray-700">🏘️ Quarters</span>
+        </div>
+        <QuarterToggle showQuarters={showQuarters} onToggle={setShowQuarters} />
+      </div>
+    </div>
+  )
+
   return (
     <div className="flex h-[calc(100vh-73px)]">
-      <SidePanel>
+      <SidePanel mapControls={mapControls}>
         <SearchBar 
           onCitySelect={handleCitySelect} 
           onAddressSelect={handleAddressSelect}
@@ -114,12 +132,6 @@ export default function MapContainer() {
       
       <div className="flex-1 bg-white rounded-lg shadow-lg p-6 relative">
         <div className="h-full relative">
-          <div className="absolute bottom-2 left-2 z-50">
-            <ThemeToggle currentTheme={mapTheme} onThemeChange={setMapTheme} />
-          </div>
-          <div className="absolute top-2 left-2 z-50">
-            <QuarterToggle showQuarters={showQuarters} onToggle={setShowQuarters} />
-          </div>
           <div className="absolute top-2 right-2 z-50">
             <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
           </div>

@@ -9,7 +9,7 @@ export default function QuarterToggle({ showQuarters, onToggle }: QuarterToggleP
       <button
         type="button"
         onClick={() => onToggle(!showQuarters)}
-        className={`px-3 py-2 text-xs font-medium rounded-md transition-colors ${
+        className={`w-full px-3 py-2 text-xs font-medium rounded-md transition-colors ${
           showQuarters 
             ? 'bg-blue-600 text-white' 
             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'

@@ -2,9 +2,10 @@ import { ReactNode } from 'react'
 
 interface SidePanelProps {
   children: ReactNode
+  mapControls?: ReactNode
 }
 
-export default function SidePanel({ children }: SidePanelProps) {
+export default function SidePanel({ children, mapControls }: SidePanelProps) {
   return (
     <div className="w-80 bg-gradient-to-b from-gray-50 to-white shadow-xl border-r border-gray-200/50 backdrop-blur-sm">
       <div className="p-6 border-b border-gray-200/50">
@@ -38,12 +39,8 @@ export default function SidePanel({ children }: SidePanelProps) {
           </div>
           
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-            <h4 className="text-sm font-medium text-gray-700 mb-2">Map Controls</h4>
-            <div className="text-xs text-gray-600 space-y-1">
-              <p>🎨 <strong>Theme:</strong> Bottom-left corner</p>
-              <p>🏘️ <strong>Quarters:</strong> Top-left corner</p>
-              <p>🔍 <strong>Zoom:</strong> Top-right corner</p>
-            </div>
+            <h4 className="text-sm font-medium text-gray-700 mb-3">Map Controls</h4>
+            {mapControls}
           </div>
         </div>
       </div>
