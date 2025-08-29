@@ -1,9 +1,12 @@
 import Link from 'next/link'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 export default function Sources() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
-      <div className="max-w-4xl mx-auto px-6 py-8">
+      <Header />
+      <div className="max-w-4xl mx-auto px-6 py-8 pb-24">
         <Link 
           href="/"
           className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:underline mb-8"
@@ -329,6 +332,7 @@ export default function Sources() {
           </p>
         </section>
       </div>
+      <Footer />
     </div>
   )
 }
