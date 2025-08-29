@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, GeoJSON } from 'react-leaflet'
 import { Map as LeafletMap } from 'leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import LuzernMarker from './LuzernMarker'
 
 type MapTheme = 'neutral' | 'light' | 'dark'
 
@@ -280,6 +281,7 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters }, ref) => {
                   }}
                 />
               )}
+              <LuzernMarker map={mapRef.current} theme={theme} />
             </>
           )}
         </MapContainer>
