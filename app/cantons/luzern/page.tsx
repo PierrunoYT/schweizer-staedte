@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { luzernCantonData, luzernMunicipalities } from '../../data/cantons/luzern'
+import { luzernCantonData, luzernMunicipalities } from '../../cities/luzern/data'
 import Link from 'next/link'
 
 export default function LuzernCantonPage() {

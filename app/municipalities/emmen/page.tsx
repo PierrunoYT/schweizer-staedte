@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { luzernMunicipalities } from '../../data/cantons/luzern'
+import { luzernMunicipalities } from '../../cities/luzern/data'
 
 export default function EmmenPage() {
   const municipality = luzernMunicipalities.find(m => m.name === 'Emmen')

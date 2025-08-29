@@ -76,7 +76,7 @@ export default function SidePanel() {
                   </div>
                   <div className="text-red-900 dark:text-red-100">
                     <span className="font-medium">🏢 Dichte:</span>
-                    <br />2,938/km²
+                    <br />2,962/km²
                   </div>
                 </div>
               </div>

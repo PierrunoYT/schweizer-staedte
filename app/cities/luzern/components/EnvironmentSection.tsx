@@ -1,4 +1,4 @@
-import { luzernCity } from '../../../data/cantons/luzern'
+import { luzernCity } from '../data'
 
 export default function EnvironmentSection() {
   return (

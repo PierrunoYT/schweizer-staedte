@@ -24,10 +24,15 @@ export interface LuzernStats {
     heightRange: { min: number, max: number } // elevation range in meters
     centerElevation: number // elevation of city center
     landUse: {
-      settlement: number // percentage
+      settlement: number // percentage - urban areas
       agriculture: number // percentage
       forest: number // percentage
       unproductive: number // percentage
+      // Detailed breakdown
+      urbanPercentage: number // total urban area percentage
+      ruralPercentage: number // total rural area percentage
+      builtUpArea: number // actual built-up area percentage
+      settlementPerCapita: number // m² settlement area per inhabitant
     }
     climate: {
       averageTemp: number // °C
@@ -77,6 +82,15 @@ export interface LuzernStats {
     climateGoal: string
     sportClubs: number
   }
+  development: {
+    settlementGrowth1982to2016: {
+      increase: number // percentage increase
+      fromKm2: number // starting area in km²
+      toKm2: number // ending area in km²
+      yearsSpan: number // time period
+    }
+    urbanDensityRanking: string // position within canton/country
+  }
   openData: {
     cityDatasets: number
     cantonDatasets: number
@@ -97,7 +111,7 @@ export const luzernCantonData = {
   name: 'Luzern',
   abbreviation: 'LU',
   capital: 'Luzern',
-  coordinates: [47.050545, 8.305468] as [number, number], // Precise city center coordinates
+  coordinates: [47.050168, 8.309307] as [number, number], // Precise city center coordinates
   stats: {
     totalPopulation: 438000, // Updated 2024 data
     area: 1493.4,
@@ -121,12 +135,12 @@ export const luzernCantonData = {
 export const luzernCity: LuzernCity = {
   id: 'lucerne',
   name: 'Luzern',
-  coordinates: [47.050545, 8.305468], // Precise city center coordinates
+  coordinates: [47.050168, 8.309307], // Precise city center coordinates
   postalCode: '6000',
   stats: {
     population: 86234, // Updated 2024 official data
     area: 29.11, // Precise area data
-    density: 2938, // Updated density
+    density: 2962, // Updated BFS density calculation
     elevation: 436,
     unemployment: 2.6,
     averageIncome: 75000,
@@ -179,7 +193,12 @@ export const luzernCity: LuzernCity = {
         settlement: 48.8,
         agriculture: 27.0,
         forest: 22.0,
-        unproductive: 2.2
+        unproductive: 2.2,
+        // Detailed breakdown
+        urbanPercentage: 48.8, // Urban area (settlement)
+        ruralPercentage: 51.2, // Rural area (agriculture + forest + unproductive)
+        builtUpArea: 42.1, // Actual built-up area excluding green spaces
+        settlementPerCapita: 174 // m² settlement area per inhabitant (lowest in canton)
       },
       climate: {
         averageTemp: 10.1,
@@ -241,6 +260,15 @@ export const luzernCity: LuzernCity = {
       climateGoal: 'Netto null Treibhausgasemissionen bis 2050',
       sportClubs: 200
     },
+    development: {
+      settlementGrowth1982to2016: {
+        increase: 20, // percentage increase over 34 years
+        fromKm2: 7.76, // starting settlement area
+        toKm2: 9.25, // ending settlement area
+        yearsSpan: 34
+      },
+      urbanDensityRanking: 'Highest population density in Kanton Luzern, one of densest in Switzerland'
+    },
     openData: {
       cityDatasets: 200,
       cantonDatasets: 500,
@@ -252,8 +280,8 @@ export const luzernCity: LuzernCity = {
 export const luzernMunicipalities = [
   {
     name: 'Luzern',
-    population: 82257,
-    area: 37.4,
+    population: 86234, // Updated to match 2024 official data
+    area: 29.11, // Updated to match BFS official area
     type: 'city'
   },
   {

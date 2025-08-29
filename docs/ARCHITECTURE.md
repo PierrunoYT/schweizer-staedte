@@ -42,7 +42,7 @@ The application follows the official Swiss administrative structure:
 - **Maintainability**: Easy to update, test, and extend individual sections
 
 ### 3. **Data-Driven Design**
-- **Centralized Data Source**: All statistics from `/data/cantons/luzern/index.ts`
+- **Centralized Data Source**: All statistics from `/cities/luzern/data/index.ts`
 - **Type Safety**: TypeScript interfaces ensure data consistency
 - **Real Data**: Based on official 2024 Swiss federal statistics
 
@@ -70,9 +70,6 @@ The application follows the official Swiss administrative structure:
 ```
 schweizer-staedte/
 ├── app/                          # Next.js App Router
-│   ├── cities/luzern/           # City-level pages
-│   │   ├── page.tsx             # Main controller (127 lines)
-│   │   └── components/          # Modular section components
 │   │       ├── OverviewSection.tsx
 │   │       ├── GeographySection.tsx
 │   │       ├── DemographicsSection.tsx
@@ -98,11 +95,12 @@ schweizer-staedte/
 │   │   ├── SidePanel.tsx       # Map sidebar with statistics
 │   │   ├── ThemeToggle.tsx     # Standalone theme toggle
 │   │   ├── QuarterToggle.tsx   # Quarter overlay control
-│   │   ├── SearchBar.tsx       # Legacy search (unused)
 │   │   └── ZoomControls.tsx    # Legacy zoom controls (unused)
-│   ├── data/                   # Data layer
-│   │   ├── cantons/luzern/     # Swiss statistical data
-│   │   └── cities.ts           # City data (legacy)
+│   ├── cities/luzern/          # City-level pages  
+│   │   ├── page.tsx            # Main controller (127 lines)
+│   │   ├── data/               # City-specific statistical data
+│   │   │   └── index.ts        # Swiss statistical data
+│   │   └── components/         # Modular section components
 │   ├── context/                # React Context providers
 │   │   └── ThemeContext.tsx    # Theme management (light/dark)
 │   └── services/               # Legacy services (unused)

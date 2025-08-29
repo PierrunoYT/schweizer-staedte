@@ -243,7 +243,7 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters }, ref) => {
       ) : (
         <MapContainer
           ref={mapRef}
-          center={[47.050545, 8.305468]} // Precise center of Luzern city  
+          center={[47.050168, 8.309307]} // Precise center of Luzern city  
           zoom={12}
           style={{ height: '100%', width: '100%' }}
           scrollWheelZoom={true}

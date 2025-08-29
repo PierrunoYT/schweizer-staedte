@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { luzernMunicipalities } from '../../../data/cantons/luzern'
+import { luzernMunicipalities } from '../data'
 
 export default function MunicipalitiesSection() {
   return (

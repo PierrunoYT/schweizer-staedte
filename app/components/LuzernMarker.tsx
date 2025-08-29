@@ -16,7 +16,7 @@ interface CoordinateSystem {
 }
 
 const LUZERN_COORDINATES: CoordinateSystem = {
-  decimal: [47.050545, 8.305468], // Bahnhof Luzern
+  decimal: [47.050168, 8.309307], // Stadtzentrum Luzern
   ch1903: [666254, 211241] // Swiss LV95 coordinates
 }
 
@@ -139,7 +139,7 @@ export default function LuzernMarker({
                 <div><strong>👥 Einwohner:</strong><br>86,234</div>
                 <div><strong>📍 Höhe:</strong><br>436m ü.M.</div>
                 <div><strong>📐 Fläche:</strong><br>29.11 km²</div>
-                <div><strong>🏢 Dichte:</strong><br>2,938/km²</div>
+                <div><strong>🏢 Dichte:</strong><br>2,962/km²</div>
                 <div><strong>💰 Ø Einkommen:</strong><br>CHF 75,000</div>
                 <div><strong>🎓 Universität:</strong><br>Uni Luzern</div>
               </div>

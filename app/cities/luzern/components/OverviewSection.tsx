@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { luzernCity } from '../../../data/cantons/luzern'
+import { luzernCity } from '../data'
 
 export default function OverviewSection() {
   return (
