@@ -21,7 +21,7 @@ export default function LuzernPage() {
     { id: 'demographics', name: 'Demografie', icon: '👥' },
     { id: 'geography', name: 'Geografie', icon: '🌍' },
     { id: 'economy', name: 'Wirtschaft', icon: '💼' },
-    { id: 'districts', name: 'Stadtteile', icon: '🏘️' },
+    { id: 'districts', name: 'Quartiere', icon: '🏘️' },
     { id: 'municipalities', name: 'Umgebung', icon: '🏘️' },
     { id: 'tourism', name: 'Tourismus', icon: '🎯' },
     { id: 'education', name: 'Bildung', icon: '🎓' },
