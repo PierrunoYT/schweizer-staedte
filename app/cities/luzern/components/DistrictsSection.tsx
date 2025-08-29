@@ -185,7 +185,7 @@ export default function DistrictsSection() {
           <div>
             <div className="font-semibold text-blue-900 dark:text-blue-100">Größtes Quartier:</div>
             <div className="text-blue-700 dark:text-blue-300">Neustadt / Voltastrasse</div>
-            <div className="text-blue-600 dark:text-blue-400">6'548 Einwohner</div>
+            <div className="text-blue-600 dark:text-blue-400">6&apos;548 Einwohner</div>
           </div>
           <div>
             <div className="font-semibold text-blue-900 dark:text-blue-100">Kleinstes Quartier:</div>

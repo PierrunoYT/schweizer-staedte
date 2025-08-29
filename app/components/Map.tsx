@@ -107,7 +107,7 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterName
 
         // Add new markers
         if (quartierData.features) {
-          quartierData.features.forEach((feature: any) => {
+          quartierData.features.forEach((feature: { properties?: { QNAME?: string; Shape_Area?: number }; geometry?: { type: string; coordinates: number[][][] } }) => {
             if (feature.properties && feature.geometry && feature.geometry.type === 'Polygon') {
               // Calculate bounds manually for polygon
               const coordinates = feature.geometry.coordinates[0]
@@ -231,7 +231,7 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterName
     ]
   }
 
-  const getQuartierStyle = (feature: any) => {
+  const getQuartierStyle = (feature: { properties?: { QUARTIERNR?: number } }) => {
     const colors = getQuartierColors()
     const quartierNr = feature?.properties?.QUARTIERNR || 0
     const colorIndex = (quartierNr - 1) % colors.length

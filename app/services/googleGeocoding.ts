@@ -76,7 +76,7 @@ export async function searchWithGoogleGeocoding(query: string, signal?: AbortSig
     }
 
     // Transform Google results to our SearchResult format
-    return data.results.map((result, index) => {
+    return data.results.map((result) => {
       const lat = result.geometry.location.lat
       const lng = result.geometry.location.lng
       

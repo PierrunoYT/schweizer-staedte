@@ -5,7 +5,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-center gap-3 text-sm text-gray-600 dark:text-gray-400">
           <span className="font-medium">Swiss Cities Explorer</span>
           <span className="hidden sm:block">•</span>
-          <span>Discover Switzerland's municipalities and regions</span>
+          <span>Discover Switzerland&apos;s municipalities and regions</span>
         </div>
         
         <div className="flex items-center gap-6">
