@@ -1,10 +1,4 @@
-import { ReactNode } from 'react'
-
-interface SidePanelProps {
-  mapControls?: ReactNode
-}
-
-export default function SidePanel({ mapControls }: SidePanelProps) {
+export default function SidePanel() {
   return (
     <div className="w-80 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-xl border-r border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm transition-colors duration-200">
       <div className="p-6 border-b border-gray-200/50 dark:border-gray-700/50">
@@ -23,11 +17,6 @@ export default function SidePanel({ mapControls }: SidePanelProps) {
       
       <div className="p-6">
         <div className="space-y-6">
-          <div className="bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 rounded-lg p-4">
-            <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Map Controls</h4>
-            {mapControls}
-          </div>
-          
           <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/30 rounded-lg p-4">
             <h4 className="text-sm font-medium text-blue-900 dark:text-blue-100 mb-2">Luzern Statistics</h4>
             <div className="text-xs text-blue-800 dark:text-blue-200 space-y-1">

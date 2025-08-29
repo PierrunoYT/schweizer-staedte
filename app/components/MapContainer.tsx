@@ -5,6 +5,7 @@ import SidePanel from './SidePanel'
 import ThemeToggle from './ThemeToggle'
 import QuarterToggle from './QuarterToggle'
 import ZoomControls from './ZoomControls'
+import MapControlsDropdown from './MapControlsDropdown'
 
 type MapTheme = 'neutral' | 'light' | 'dark'
 
@@ -62,13 +63,14 @@ export default function MapContainer() {
 
   return (
     <div className="flex h-[calc(100vh-73px)]">
-      <SidePanel mapControls={mapControls} />
+      <SidePanel />
       
       <div className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 relative transition-colors duration-200">
         <div className="h-full relative">
           <div className="absolute top-2 right-2 z-50">
             <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
           </div>
+          <MapControlsDropdown mapControls={mapControls} theme={mapTheme} />
           <Map theme={mapTheme} showQuarters={showQuarters} ref={mapRef} />
         </div>
       </div>
