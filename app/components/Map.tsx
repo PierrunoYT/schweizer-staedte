@@ -15,10 +15,12 @@ interface MapProps {
 interface MapRef {
   setZoom: (zoom: number) => void
   getZoom: () => number
+  panTo: (coordinates: [number, number], zoom?: number) => void
 }
 
 const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters }, ref) => {
   const [isClient, setIsClient] = useState(false)
+  const [mapReady, setMapReady] = useState(false)
   const [quartierData, setQuartierData] = useState(null)
   const mapRef = useRef<LeafletMap>(null)
   const markersRef = useRef<L.Marker[]>([])
@@ -29,10 +31,16 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters }, ref) => {
     const loadQuartierData = async () => {
       try {
         const response = await fetch('/quartiers.geojson')
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`)
+        }
         const data = await response.json()
         setQuartierData(data)
+        console.log('Quartier data loaded successfully')
       } catch (error) {
-        console.error('Error loading quartier data:', error)
+        console.warn('Quartier data not available - quarters will be disabled:', error)
+        // Don't throw error, just continue without quartier data
+        setQuartierData(null)
       }
     }
     
@@ -155,6 +163,17 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters }, ref) => {
         return mapRef.current.getZoom()
       }
       return 8
+    },
+    panTo: (coordinates: [number, number], zoom?: number) => {
+      console.log('panTo called with:', coordinates, zoom, 'mapRef.current:', mapRef.current)
+      if (mapRef.current) {
+        const currentZoom = mapRef.current.getZoom()
+        const targetZoom = zoom || currentZoom
+        console.log('Setting view to:', coordinates, 'zoom:', targetZoom)
+        mapRef.current.setView(coordinates, targetZoom, { animate: true, duration: 1 })
+      } else {
+        console.log('Map ref is null in panTo')
+      }
     }
   }))
 
@@ -215,41 +234,55 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters }, ref) => {
 
   return (
     <div className="h-full w-full rounded-lg overflow-hidden border border-gray-200 relative z-0">
-      <MapContainer
-        ref={mapRef}
-        center={[47.0502, 8.3093]} // Center of Lucerne area  
-        zoom={12}
-        style={{ height: '100%', width: '100%' }}
-        scrollWheelZoom={true}
-        zoomControl={false} // Disable default zoom controls to avoid conflicts
-      >
-        <TileLayer
-          key={theme} // Force re-render when theme changes
-          url={tileLayer.url}
-          attribution={tileLayer.attribution}
-        />
-        {quartierData && showQuarters && (
-          <GeoJSON
-            key={`${theme}-${showQuarters}-geojson`}
-            data={quartierData}
-            style={getQuartierStyle}
-            onEachFeature={(feature, layer) => {
-              if (feature.properties) {
-                // Add popup
-                layer.bindPopup(`
-                  <div>
-                    <h3 style="margin: 0 0 8px 0; font-weight: bold;">
-                      ${feature.properties.QNAME || 'Quartier'}
-                    </h3>
-                    <p style="margin: 2px 0;"><strong>Quartier Nr:</strong> ${feature.properties.QUARTIERNR || 'N/A'}</p>
-                    <p style="margin: 2px 0;"><strong>Area:</strong> ${Math.round(feature.properties.Shape_Area || 0)} m²</p>
-                  </div>
-                `)
-              }
-            }}
-          />
-        )}
-      </MapContainer>
+      {!isClient ? (
+        <div className="h-full w-full flex items-center justify-center bg-gray-100">
+          <div className="text-gray-500">Loading map...</div>
+        </div>
+      ) : (
+        <MapContainer
+          ref={mapRef}
+          center={[47.0502, 8.3093]} // Center of Lucerne area  
+          zoom={12}
+          style={{ height: '100%', width: '100%' }}
+          scrollWheelZoom={true}
+          zoomControl={false} // Disable default zoom controls to avoid conflicts
+          whenReady={() => {
+            console.log('Map is ready!')
+            setMapReady(true)
+          }}
+        >
+          {mapReady && (
+            <>
+              <TileLayer
+                key={theme} // Force re-render when theme changes
+                url={tileLayer.url}
+                attribution={tileLayer.attribution}
+              />
+              {quartierData && showQuarters && (
+                <GeoJSON
+                  key={`${theme}-${showQuarters}-geojson`}
+                  data={quartierData}
+                  style={getQuartierStyle}
+                  onEachFeature={(feature, layer) => {
+                    if (feature.properties) {
+                      // Add popup
+                      layer.bindPopup(`
+                        <div>
+                          <h3 style="margin: 0 0 8px 0; font-weight: bold;">
+                            ${feature.properties.QNAME || 'Quartier'}
+                          </h3>
+                          <p style="margin: 2px 0;"><strong>Quartier Nr:</strong> ${feature.properties.QUARTIERNR || 'N/A'}</p>
+                          <p style="margin: 2px 0;"><strong>Area:</strong> ${Math.round(feature.properties.Shape_Area || 0)} m²</p>
+                        </div>
+                      `)
+                    }
+                  }}
+                />
+              )}
+            </>
+          )}
+        </MapContainer>
+      )}
     </div>
   )
 })
