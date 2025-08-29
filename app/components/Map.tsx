@@ -10,11 +10,6 @@ type MapTheme = 'neutral' | 'light' | 'dark'
 interface MapProps {
   theme: MapTheme
   showQuarters: boolean
-  searchMarker?: {
-    coordinates: [number, number]
-    label: string
-    type: 'city' | 'city-stats'
-  }
 }
 
 interface MapRef {
@@ -23,13 +18,12 @@ interface MapRef {
   panTo: (coordinates: [number, number], zoom?: number) => void
 }
 
-const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, searchMarker }, ref) => {
+const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters }, ref) => {
   const [isClient, setIsClient] = useState(false)
   const [mapReady, setMapReady] = useState(false)
   const [quartierData, setQuartierData] = useState(null)
   const mapRef = useRef<LeafletMap>(null)
   const markersRef = useRef<L.Marker[]>([]) // Quarter markers
-  const searchMarkerRef = useRef<L.Marker | null>(null) // Search result marker
 
   useEffect(() => {
     setIsClient(true)
@@ -158,130 +152,6 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, searchMarker },
     }
   }, [quartierData, showQuarters, theme, isClient])
 
-  // Handle search result markers
-  useEffect(() => {
-    if (mapRef.current && isClient) {
-      // Remove existing search marker
-      if (searchMarkerRef.current) {
-        mapRef.current.removeLayer(searchMarkerRef.current)
-        searchMarkerRef.current = null
-      }
-
-      // Add new search marker if provided
-      if (searchMarker) {
-        const { coordinates, label, type } = searchMarker
-        
-        // Create custom icon based on type
-        const getMarkerIcon = (markerType: string) => {
-          const colors = {
-            city: '#10B981', // Green
-            'city-stats': '#F59E0B' // Orange for statistical data
-          }
-          
-          const color = colors[markerType as keyof typeof colors] || '#6B7280'
-          
-          if (markerType === 'city-stats') {
-            // Round marker for statistical data
-            return L.divIcon({
-              html: `
-                <div style="
-                  background: ${color};
-                  width: 24px;
-                  height: 24px;
-                  border-radius: 50%;
-                  border: 4px solid white;
-                  box-shadow: 0 3px 12px rgba(0,0,0,0.4);
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  position: relative;
-                ">
-                  <div style="
-                    width: 8px;
-                    height: 8px;
-                    background: white;
-                    border-radius: 50%;
-                  "></div>
-                </div>
-                <div style="
-                  position: absolute;
-                  top: 30px;
-                  left: 50%;
-                  transform: translateX(-50%);
-                  background: rgba(0,0,0,0.8);
-                  color: white;
-                  padding: 6px 10px;
-                  border-radius: 6px;
-                  font-size: 12px;
-                  font-weight: bold;
-                  white-space: nowrap;
-                  pointer-events: none;
-                  z-index: 1000;
-                  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-                ">${label}</div>
-              `,
-              className: 'stats-marker',
-              iconSize: [24, 24],
-              iconAnchor: [12, 12]
-            })
-          } else {
-            // Pin marker for regular cities
-            return L.divIcon({
-              html: `
-                <div style="
-                  background: ${color};
-                  width: 20px;
-                  height: 20px;
-                  border-radius: 50% 50% 50% 0;
-                  border: 3px solid white;
-                  transform: rotate(-45deg);
-                  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-                  position: relative;
-                ">
-                  <div style="
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%) rotate(45deg);
-                    width: 8px;
-                    height: 8px;
-                    background: white;
-                    border-radius: 50%;
-                  "></div>
-                </div>
-                <div style="
-                  position: absolute;
-                  top: 25px;
-                  left: 50%;
-                  transform: translateX(-50%);
-                  background: rgba(0,0,0,0.8);
-                  color: white;
-                  padding: 4px 8px;
-                  border-radius: 4px;
-                  font-size: 12px;
-                  font-weight: bold;
-                  white-space: nowrap;
-                  pointer-events: none;
-                  z-index: 1000;
-                ">${label}</div>
-              `,
-              className: 'search-marker',
-              iconSize: [20, 20],
-              iconAnchor: [10, 20]
-            })
-          }
-        }
-
-        const marker = L.marker(coordinates, { 
-          icon: getMarkerIcon(type),
-          zIndexOffset: 1000 // Ensure search markers appear above quarter markers
-        })
-        
-        marker.addTo(mapRef.current)
-        searchMarkerRef.current = marker
-      }
-    }
-  }, [searchMarker, isClient])
 
   useImperativeHandle(ref, () => ({
     setZoom: (zoom: number) => {
