@@ -90,7 +90,7 @@ export async function searchAddresses(query: string, signal?: AbortSignal): Prom
         id: `nominatim-${result.lat}-${result.lon}-${index}`,
         name: getMainName(result),
         type,
-        coordinates: [lat, lon],
+        coordinates: [lat, lon] as [number, number],
         description,
         importance: result.importance || 0
       }
