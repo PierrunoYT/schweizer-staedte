@@ -136,7 +136,7 @@ export async function searchWithGoogleGeocoding(query: string, signal?: AbortSig
         id: `google-${result.place_id}`,
         name: getMainName(result),
         type: type as SearchResult['type'],
-        coordinates: [lat, lng],
+        coordinates: [lat, lng] as [number, number],
         description: result.formatted_address,
         importance
       }
