@@ -152,6 +152,30 @@ export default function LuzernMarker({
                 text-align: center;
               ">Gegründet 840 n.Chr. • Kanton Luzern</div>
               <div style="
+                margin-top: 10px;
+                text-align: center;
+              ">
+                <a href="/cities/luzern" style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 4px;
+                  padding: 6px 12px;
+                  background: #DC2626;
+                  color: white;
+                  text-decoration: none;
+                  border-radius: 6px;
+                  font-size: 11px;
+                  font-weight: 600;
+                  transition: background-color 0.2s ease;
+                  pointer-events: auto;
+                " onmouseover="this.style.background='#B91C1C'" onmouseout="this.style.background='#DC2626'">
+                  📊 Mehr Details
+                  <svg style="width: 12px; height: 12px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </a>
+              </div>
+              <div style="
                 position: absolute;
                 top: 100%;
                 left: 50%;
