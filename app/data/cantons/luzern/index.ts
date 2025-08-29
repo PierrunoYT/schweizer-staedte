@@ -20,7 +20,9 @@ export interface LuzernStats {
   }
   // Enhanced comprehensive data
   geography: {
+    location: string // geographic location description
     heightRange: { min: number, max: number } // elevation range in meters
+    centerElevation: number // elevation of city center
     landUse: {
       settlement: number // percentage
       agriculture: number // percentage
@@ -95,7 +97,7 @@ export const luzernCantonData = {
   name: 'Luzern',
   abbreviation: 'LU',
   capital: 'Luzern',
-  coordinates: [47.0502, 8.3093] as [number, number],
+  coordinates: [47.050545, 8.305468] as [number, number], // Precise city center coordinates
   stats: {
     totalPopulation: 438000, // Updated 2024 data
     area: 1493.4,
@@ -119,7 +121,7 @@ export const luzernCantonData = {
 export const luzernCity: LuzernCity = {
   id: 'lucerne',
   name: 'Luzern',
-  coordinates: [47.0502, 8.3093],
+  coordinates: [47.050545, 8.305468], // Precise city center coordinates
   postalCode: '6000',
   stats: {
     population: 86234, // Updated 2024 official data
@@ -170,7 +172,9 @@ export const luzernCity: LuzernCity = {
     },
     // Enhanced comprehensive data
     geography: {
-      heightRange: { min: 419, max: 1127 }, // Bürgenstock peak
+      location: 'Zentralschweiz, Vierwaldstättersee, zwischen Dietschiberg und Gütsch',
+      heightRange: { min: 419, max: 1124 }, // Updated precise range
+      centerElevation: 436, // City center elevation
       landUse: {
         settlement: 48.8,
         agriculture: 27.0,

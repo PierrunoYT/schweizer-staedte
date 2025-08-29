@@ -62,8 +62,8 @@ export const swissCities: City[] = [
     id: 'lucerne',
     name: 'Luzern',
     canton: 'Luzern',
-    coordinates: [47.0502, 8.3093],
-    population: 82257,
+    coordinates: [47.050545, 8.305468], // Precise city center coordinates
+    population: 86234, // Updated 2024 population
     postalCode: '6000',
   },
   {

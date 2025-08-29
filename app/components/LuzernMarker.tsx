@@ -136,10 +136,10 @@ export default function LuzernMarker({
                 font-size: 13px;
                 line-height: 1.4;
               ">
-                <div><strong>👥 Einwohner:</strong><br>82,257</div>
+                <div><strong>👥 Einwohner:</strong><br>86,234</div>
                 <div><strong>📍 Höhe:</strong><br>436m ü.M.</div>
-                <div><strong>📐 Fläche:</strong><br>37.4 km²</div>
-                <div><strong>🏢 Dichte:</strong><br>2,200/km²</div>
+                <div><strong>📐 Fläche:</strong><br>29.11 km²</div>
+                <div><strong>🏢 Dichte:</strong><br>2,938/km²</div>
                 <div><strong>💰 Ø Einkommen:</strong><br>CHF 75,000</div>
                 <div><strong>🎓 Universität:</strong><br>Uni Luzern</div>
               </div>
