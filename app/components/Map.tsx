@@ -113,8 +113,8 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterName
               const coordinates = feature.geometry.coordinates[0]
               let minLat = Infinity, maxLat = -Infinity, minLng = Infinity, maxLng = -Infinity
               
-              coordinates.forEach((coord: [number, number]) => {
-                const [lng, lat] = coord
+              coordinates.forEach((coord: number[]) => {
+                const [lng, lat] = coord as [number, number]
                 minLat = Math.min(minLat, lat)
                 maxLat = Math.max(maxLat, lat)
                 minLng = Math.min(minLng, lng)
