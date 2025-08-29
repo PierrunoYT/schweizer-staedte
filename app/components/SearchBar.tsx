@@ -1,7 +1,8 @@
 'use client'
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { searchCities, searchCantons, City } from '../data/cities'
-import { searchAddresses, SearchResult } from '../services/geocoding'
+import { SearchResult } from '../services/geocoding'
+import { searchWithGoogleGeocoding, trackGoogleGeocodingUsage } from '../services/googleGeocoding'
 
 interface SearchBarProps {
   placeholder?: string
@@ -88,8 +89,11 @@ export default function SearchBar({
     abortControllerRef.current = new AbortController()
     
     try {
-      // Search addresses via Nominatim (potentially slow)
-      addresses = await searchAddresses(query, abortControllerRef.current.signal)
+      // Search addresses via Google Geocoding (with Nominatim fallback)
+      addresses = await searchWithGoogleGeocoding(query, abortControllerRef.current.signal)
+      
+      // Track usage for monitoring
+      trackGoogleGeocodingUsage()
       
       // Cache the results
       searchCacheRef.current.set(trimmedQuery, addresses)
