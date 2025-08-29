@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import SidePanel from './SidePanel'
+import SearchBar from './SearchBar'
 import ThemeToggle from './ThemeToggle'
 import QuarterToggle from './QuarterToggle'
 import ZoomControls from './ZoomControls'
@@ -19,6 +20,11 @@ export default function MapContainer() {
   const [mapTheme, setMapTheme] = useState<MapTheme>('neutral')
   const [showQuarters, setShowQuarters] = useState(true)
   const mapRef = useRef<MapRef>(null)
+
+  const handleSearch = (query: string) => {
+    console.log('Searching for:', query)
+    // TODO: Implement search functionality
+  }
 
   const handleZoomIn = () => {
     if (mapRef.current) {
@@ -40,7 +46,10 @@ export default function MapContainer() {
       </SidePanel>
       
       <div className="flex-1 bg-white rounded-lg shadow-lg p-6 relative">
-        <div className="h-full relative">
+        <div className="mb-4">
+          <SearchBar onSearch={handleSearch} />
+        </div>
+        <div className="h-[calc(100%-4rem)] relative">
           <div className="absolute bottom-2 left-2 z-50">
             <ThemeToggle currentTheme={mapTheme} onThemeChange={setMapTheme} />
           </div>
