@@ -32,9 +32,24 @@ export default function LuzernMarker({
   useEffect(() => {
     if (!map) return
 
+    // Check if map is properly initialized
+    try {
+      if (!map.getPane('overlayPane')) {
+        console.warn('Map panes not ready yet, skipping marker creation')
+        return
+      }
+    } catch (error) {
+      console.warn('Map not ready for marker creation:', error)
+      return
+    }
+
     // Remove existing marker
     if (markerRef.current) {
-      map.removeLayer(markerRef.current)
+      try {
+        map.removeLayer(markerRef.current)
+      } catch (error) {
+        console.warn('Error removing existing marker:', error)
+      }
       markerRef.current = null
     }
 
@@ -274,16 +289,28 @@ export default function LuzernMarker({
       window.location.href = '/cities/luzern'
     })
 
-    marker.addTo(map)
-    markerRef.current = marker
+    // Add small delay to ensure map is fully ready
+    const timeoutId = setTimeout(() => {
+      try {
+        marker.addTo(map)
+        markerRef.current = marker
+      } catch (error) {
+        console.warn('Error adding marker to map:', error)
+      }
+    }, 100)
 
     return () => {
-      if (markerRef.current) {
-        map.removeLayer(markerRef.current)
+      clearTimeout(timeoutId)
+      if (markerRef.current && map) {
+        try {
+          map.removeLayer(markerRef.current)
+        } catch (error) {
+          console.warn('Error removing marker during cleanup:', error)
+        }
         markerRef.current = null
       }
     }
-  }, [map, coordinates, label, showLabel])
+  }, [map, coordinates, label, showLabel, theme])
 
   return null // This component doesn't render JSX directly
 }

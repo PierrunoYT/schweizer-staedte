@@ -79,17 +79,14 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterName
 
   useEffect(() => {
     // Reset map instance when theme changes to prevent reuse errors
-    setMapReady(false)
     setMapInstance(`map-${theme}-${Date.now()}`)
     
-    // Clear all markers when theme changes
-    return () => {
-      if (mapRef.current) {
-        markersRef.current.forEach(marker => {
-          mapRef.current?.removeLayer(marker)
-        })
-        markersRef.current = []
-      }
+    // Clear quarter name markers when theme changes
+    if (mapRef.current) {
+      markersRef.current.forEach(marker => {
+        mapRef.current?.removeLayer(marker)
+      })
+      markersRef.current = []
     }
   }, [theme])
 
