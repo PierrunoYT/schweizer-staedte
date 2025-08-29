@@ -329,7 +329,7 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterName
                   }}
                 />
               )}
-              <LuzernMarker map={mapRef.current} theme={theme} />
+              <LuzernMarker map={mapRef.current} theme={theme} coordinates={[47.050168, 8.309307]} />
             </>
           )}
         </MapContainer>
