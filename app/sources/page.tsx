@@ -47,6 +47,9 @@ export default function Sources() {
                 <li>• <a href="https://www.lustat.ch/services/lexikon/raumgliederungen/institutionelle-gliederung" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Institutional Spatial Structure</a></li>
                 <li>• <a href="https://www.lustat.ch/files_ftp/daten/gd/1061/w012_008t_gd1061_qu_d_2019.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">LUSTAT Quarter Data 2019</a></li>
                 <li>• <a href="https://www.lustat.ch/files/lustat/analysen/focus/lustatfocus_02.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">LUSTAT Focus Regional Analysis</a></li>
+                <li>• <a href="https://www.lustat.ch/files_ftp/daten/gd/1061/w012_008t_gd1061_qu_d_2024.xlsx" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">LUSTAT Quarter Data 2024 Excel</a></li>
+                <li>• <a href="https://www.lustat.ch/files/lustat/analysen/jahrbuch/2024/jbkt_2024.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">LUSTAT Yearbook 2024</a></li>
+                <li>• <a href="https://www.lustat.ch/files/lustat/analysen/news/2024/lustatnews_2024_08_22.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">LUSTAT News 2024</a></li>
               </ul>
             </div>
             <div>
@@ -57,6 +60,7 @@ export default function Sources() {
                 <li>• <a href="https://www.bfs.admin.ch/asset/de/3262708" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">BFS Assets</a></li>
                 <li>• <a href="https://www.bfs.admin.ch/bfsstatic/dam/assets/345204/master" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">BFS Statistical Data</a></li>
                 <li>• <a href="https://www.bfs.admin.ch/bfsstatic/dam/assets/177856/master" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">BFS Municipal Statistics</a></li>
+                <li>• <a href="https://dam-api.bfs.admin.ch/hub/api/dam/assets/30486999/master" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">BFS Population Statistics API</a></li>
                 <li>• <a href="https://www.atlas.bfs.admin.ch/maps/122.76/map/mapIdOnly/26313_de.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">BFS Statistical Atlas</a></li>
                 <li>• <a href="https://www.are.admin.ch/are/de/home/raumentwicklung-und-raumplanung/grundlagen-und-daten/raumbeobachtung/siedlung/siedlungsflaechen.html" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">ARE Settlement Areas</a></li>
                 <li>• <a href="https://www.are.admin.ch/dam/are/it/dokumente/raumplanung/publikationen/trends_der_siedlungsflaechenentwicklunginderschweiz.pdf.download.pdf/trends_der_siedlungsflaechenentwicklunginderschweiz.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">ARE Settlement Development Trends</a></li>
@@ -73,6 +77,8 @@ export default function Sources() {
                 <li>• <a href="https://www.stadtluzern.ch/_doc/351483" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Stadt Luzern Documents</a></li>
                 <li>• <a href="https://map.stadtluzern.ch/citymap/?l=e20bc422d0fc4f71b237f705c179fef3" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Stadt Luzern City Map</a></li>
                 <li>• <a href="https://www.stadtluzern.ch/_docn/5063326/Beilage_1_Statistische_Beobachtungen_und_Analysen.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Stadt Luzern Statistical Analysis</a></li>
+                <li>• <a href="https://www.stadtluzern.ch/dienstleistungeninformation/3529" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Stadt Luzern Population Services</a></li>
+                <li>• <a href="https://www.stadtluzern.ch/index.php/_rte/information/2540332" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Stadt Luzern Population Information</a></li>
                 <li>• <a href="https://www.stadtluzern.ch/_docn/3189556/BA_20_vom_9._Juni_2021.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Stadt Luzern Building Report 2021</a></li>
                 <li>• <a href="https://www.stadtluzern.ch/_docn/1690160/REK-Broschure-2018_StadtLuzern_reduziert.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Stadt Luzern Development Concept</a></li>
                 <li>• <a href="https://www.stadtluzern.ch/_docn/4585477/Antwort_auf_die_Interpellation_230.pdf" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Stadt Luzern Interpellation Answer</a></li>
@@ -221,6 +227,12 @@ export default function Sources() {
                 <li>• <a href="https://spitex-statistik-luzern.ch/dokumentation" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Spitex Statistics Lucerne</a></li>
                 <li>• <a href="https://migration.lu.ch/Kontakt/Zahlen_und_Fakten" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Migration Statistics Canton Lucerne</a></li>
                 <li>• <a href="https://www.zg.ch/behoerden/gesundheitsdirektion/statistikfachstelle/fachstelle/open-government-data-1/downloads/ogd-strategie" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">OGD Strategy Canton Zug</a></li>
+                <li>• <a href="https://www.citypopulation.de/de/switzerland/luzern/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">CityPopulation Lucerne Statistics</a></li>
+                <li>• <a href="https://www.zentralplus.ch/wirtschaft/so-wohnt-es-sich-in-den-luzerner-stadtteilen-682577/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Zentralplus District Living Report</a></li>
+                <li>• <a href="https://www.zentralplus.ch/gesellschaft/so-wappnet-sich-die-stadt-luzern-fuer-100000-einwohner-837227/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Zentralplus 100k Residents Preparation</a></li>
+                <li>• <a href="https://www.zentralplus.ch/gesellschaft/der-kanton-luzern-waechst-2024-um-5200-personen-2798686/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Zentralplus Canton Growth 2024</a></li>
+                <li>• <a href="https://de.statista.com/statistik/daten/studie/743833/umfrage/bevoelkerung-des-kantons-luzern/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Statista Canton Population</a></li>
+                <li>• <a href="https://www.wuerzenbach.ch/clubdesk/w_home/fileservlet?id=1003084&s=djEt-nQlPP9-M18MBia8Z6ORhNggwvC7yWH_eqZZiDlxXCE%3D" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Würzenbach District Document</a></li>
               </ul>
             </div>
             <div>
