@@ -22,10 +22,22 @@ interface MapRef {
 export default function MapContainer() {
   const [mapTheme, setMapTheme] = useState<MapTheme>('neutral')
   const [showQuarters, setShowQuarters] = useState(true)
+  const [searchMarker, setSearchMarker] = useState<{
+    coordinates: [number, number]
+    label: string
+    type: 'city' | 'address' | 'poi'
+  } | undefined>(undefined)
   const mapRef = useRef<MapRef>(null)
 
   const handleCitySelect = (city: City) => {
     console.log('Selected city:', city, 'Map ref:', mapRef.current)
+    
+    // Set search marker
+    setSearchMarker({
+      coordinates: city.coordinates,
+      label: city.name,
+      type: 'city'
+    })
     
     // Add a small delay to ensure map is ready
     setTimeout(() => {
@@ -41,6 +53,13 @@ export default function MapContainer() {
 
   const handleAddressSelect = (address: SearchResult) => {
     console.log('Selected address:', address, 'Map ref:', mapRef.current)
+    
+    // Set search marker
+    setSearchMarker({
+      coordinates: address.coordinates,
+      label: address.name,
+      type: address.type === 'street' ? 'address' : address.type === 'poi' ? 'poi' : 'address'
+    })
     
     // Add a small delay to ensure map is ready
     setTimeout(() => {
@@ -135,7 +154,7 @@ export default function MapContainer() {
           <div className="absolute top-2 right-2 z-50">
             <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
           </div>
-          <Map theme={mapTheme} showQuarters={showQuarters} ref={mapRef} />
+          <Map theme={mapTheme} showQuarters={showQuarters} searchMarker={searchMarker} ref={mapRef} />
         </div>
       </div>
     </div>

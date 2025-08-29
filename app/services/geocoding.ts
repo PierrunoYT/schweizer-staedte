@@ -26,7 +26,7 @@ export interface SearchResult {
   importance: number
 }
 
-export async function searchAddresses(query: string): Promise<SearchResult[]> {
+export async function searchAddresses(query: string, signal?: AbortSignal): Promise<SearchResult[]> {
   if (!query.trim() || query.length < 3) {
     return []
   }
@@ -44,7 +44,8 @@ export async function searchAddresses(query: string): Promise<SearchResult[]> {
     const response = await fetch(url.toString(), {
       headers: {
         'User-Agent': 'Swiss Cities Map Application'
-      }
+      },
+      signal // Add abort signal support
     })
     
     if (!response.ok) {

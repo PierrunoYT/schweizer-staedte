@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { searchCities, searchCantons, City } from '../data/cities'
 import { searchAddresses, SearchResult } from '../services/geocoding'
 
@@ -25,6 +25,11 @@ export default function SearchBar({
   const [showResults, setShowResults] = useState(false)
   const [isSearching, setIsSearching] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
+  const debounceTimerRef = useRef<NodeJS.Timeout>()
+  const abortControllerRef = useRef<AbortController>()
+  
+  // Simple cache for search results
+  const searchCacheRef = useRef<Map<string, SearchResult[]>>(new Map())
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -36,6 +41,13 @@ export default function SearchBar({
     document.addEventListener('mousedown', handleClickOutside)
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
+      // Cleanup on unmount
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current)
+      }
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
     }
   }, [])
 
@@ -46,31 +58,88 @@ export default function SearchBar({
     }
   }
 
-  const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const performSearch = useCallback(async (query: string) => {
+    const trimmedQuery = query.trim().toLowerCase()
+    
+    // Search local cities and cantons (always fast)
+    const cities = searchCities(query)
+    const cantons = searchCantons(query)
+    
+    // Set local results immediately
+    setSearchResults(cities.slice(0, 5))
+    setCantonResults(cantons.slice(0, 3))
+    
+    // Check cache for address results
+    let addresses: SearchResult[] = []
+    if (searchCacheRef.current.has(trimmedQuery)) {
+      addresses = searchCacheRef.current.get(trimmedQuery) || []
+      setAddressResults(addresses.slice(0, 6))
+      setShowResults(true)
+      setIsSearching(false)
+      return
+    }
+    
+    // Cancel previous request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+    
+    // Create new abort controller for this request
+    abortControllerRef.current = new AbortController()
+    
+    try {
+      // Search addresses via Nominatim (potentially slow)
+      addresses = await searchAddresses(query, abortControllerRef.current.signal)
+      
+      // Cache the results
+      searchCacheRef.current.set(trimmedQuery, addresses)
+      
+      // Limit cache size to prevent memory issues
+      if (searchCacheRef.current.size > 50) {
+        const firstKey = searchCacheRef.current.keys().next().value
+        searchCacheRef.current.delete(firstKey)
+      }
+      
+      setAddressResults(addresses.slice(0, 6))
+    } catch (error) {
+      if ((error as Error).name !== 'AbortError') {
+        console.error('Search error:', error)
+        setAddressResults([])
+      }
+    } finally {
+      setShowResults(true)
+      setIsSearching(false)
+    }
+  }, [])
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value
     setSearchQuery(query)
     
+    // Clear previous debounce timer
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current)
+    }
+    
     if (query.trim().length >= 2) {
       setIsSearching(true)
-      
-      // Search local cities and cantons
-      const cities = searchCities(query)
-      const cantons = searchCantons(query)
-      
-      // Search addresses via Nominatim (for streets, POIs, etc.)
-      const addresses = await searchAddresses(query)
-      
-      setSearchResults(cities.slice(0, 5)) // Limit to 5 cities
-      setCantonResults(cantons.slice(0, 3)) // Limit to 3 cantons  
-      setAddressResults(addresses.slice(0, 6)) // Limit to 6 addresses
       setShowResults(true)
-      setIsSearching(false)
+      
+      // Debounce the search to reduce API calls
+      debounceTimerRef.current = setTimeout(() => {
+        performSearch(query)
+      }, 300) // 300ms delay
     } else {
       setSearchResults([])
       setCantonResults([])
       setAddressResults([])
       setShowResults(false)
       setIsSearching(false)
+      
+      // Cancel any pending search
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
     }
   }
 
