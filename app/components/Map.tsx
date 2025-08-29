@@ -107,7 +107,7 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterName
 
         // Add new markers
         if (quartierData?.features) {
-          quartierData.features.forEach((feature) => {
+          quartierData.features.forEach((feature: any) => {
             if (feature.properties && feature.geometry && feature.geometry.type === 'Polygon') {
               // Calculate bounds manually for polygon
               const coordinates = feature.geometry.coordinates[0]
