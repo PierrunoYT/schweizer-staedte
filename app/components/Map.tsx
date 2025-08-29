@@ -24,8 +24,8 @@ interface MapRef {
 const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterNames, showMunicipalities }, ref) => {
   const [isClient, setIsClient] = useState(false)
   const [mapReady, setMapReady] = useState(false)
-  const [quartierData, setQuartierData] = useState(null)
-  const [municipalityData, setMunicipalityData] = useState(null)
+  const [quartierData, setQuartierData] = useState<{ features?: Array<{ properties?: { QNAME?: string; Shape_Area?: number; QUARTIERNR?: number }; geometry?: { type: string; coordinates: number[][][] } }> } | null>(null)
+  const [municipalityData, setMunicipalityData] = useState<{ features?: Array<{ properties?: { NAME?: string; GEMEINDE?: string; BFS_NR?: string }; geometry?: { type: string; coordinates: number[][][] } }> } | null>(null)
   const [mapInstance, setMapInstance] = useState<string>(() => `map-${Date.now()}`)
   const mapRef = useRef<LeafletMap>(null)
   const markersRef = useRef<L.Marker[]>([]) // Quarter markers
@@ -106,8 +106,8 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterName
         markersRef.current = []
 
         // Add new markers
-        if (quartierData.features) {
-          quartierData.features.forEach((feature: { properties?: { QNAME?: string; Shape_Area?: number }; geometry?: { type: string; coordinates: number[][][] } }) => {
+        if (quartierData?.features) {
+          quartierData.features.forEach((feature) => {
             if (feature.properties && feature.geometry && feature.geometry.type === 'Polygon') {
               // Calculate bounds manually for polygon
               const coordinates = feature.geometry.coordinates[0]
