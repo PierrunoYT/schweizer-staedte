@@ -44,6 +44,147 @@ export default function GeographySection() {
         </div>
       </div>
 
+      {/* Natural Features */}
+      <div className="space-y-6">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-2">
+          🌊 Natürliche Merkmale innerhalb der Stadtgrenzen
+        </h2>
+        
+        {/* Lakes Section */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            🏞️ Seen
+          </h3>
+          <div className="space-y-4">
+            <div className="border-l-4 border-blue-500 pl-4">
+              <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">Vierwaldstättersee</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
+                Das bedeutendste Gewässer der Stadt Luzern. Die Stadt liegt am nordwestlichen Ufer beim Ausfluss der Reuss.
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                <div>
+                  <span className="font-medium text-gray-900 dark:text-white">Fläche:</span>
+                  <br />114 km²
+                </div>
+                <div>
+                  <span className="font-medium text-gray-900 dark:text-white">Höhe:</span>
+                  <br />433 m ü.M.
+                </div>
+                <div>
+                  <span className="font-medium text-gray-900 dark:text-white">Max. Tiefe:</span>
+                  <br />214 m
+                </div>
+                <div>
+                  <span className="font-medium text-gray-900 dark:text-white">Charakteristik:</span>
+                  <br />Fjordartig verzweigt
+                </div>
+              </div>
+            </div>
+            
+            <div className="border-l-4 border-orange-500 pl-4">
+              <h4 className="font-semibold text-orange-900 dark:text-orange-100 mb-2">Rotsee</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Tiefster Punkt des Stadtgebiets auf 419 m ü.M. im nördlichen Teil der Stadt.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Rivers and Streams */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            💧 Flüsse und Bäche
+          </h3>
+          <div className="space-y-4">
+            <div className="border-l-4 border-blue-600 pl-4">
+              <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-2">Reuss</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
+                Der grösste Fluss im Kanton Luzern. Verlässt den Vierwaldstättersee bei der Seebrücke, 
+                teilt die Stadt in Altstadt und Neustadt und unterquert die berühmte Kapellbrücke.
+              </p>
+            </div>
+            
+            <div className="border-l-4 border-green-500 pl-4">
+              <h4 className="font-semibold text-green-900 dark:text-green-100 mb-2">Kleine Emme</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Mündet am Reusszopf zwischen Reussbühl und Emmenbrücke in die Reuss. Länge: 36 km.
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-medium text-gray-900 dark:text-white mb-2">Weitere Gewässer</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                <div className="space-y-1">
+                  <div><strong>Krienbach:</strong> Lokaler Bach durch das Stadtgebiet</div>
+                  <div><strong>Rotbach (Rothenburg):</strong> 20 km Länge</div>
+                  <div><strong>Würzenbach:</strong> 8 km Länge (Kleiner Bach)</div>
+                </div>
+                <div className="space-y-1">
+                  <div><strong>Emmenweidkanal:</strong> Kleinerer Kanal</div>
+                  <div><strong>Limbach:</strong> Lokales Gewässer</div>
+                  <div><strong>Ränggbach:</strong> Lokales Gewässer</div>
+                  <div><strong>Schachenkanal:</strong> Kleinerer Kanal</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mountains and Hills */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+            ⛰️ Berge und Hügel
+          </h3>
+          <div className="space-y-4">
+            <div className="border-l-4 border-red-500 pl-4">
+              <h4 className="font-semibold text-red-900 dark:text-red-100 mb-2">Bürgenstock (Exklave) - 1127.8 m ü.M.</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
+                Höchster Punkt der Gemeinde Luzern in der Exklave Bürgenstock. 
+                Erstreckt sich über 3,3 km entlang des Südufers des Vierwaldstättersees.
+              </p>
+              <div className="grid grid-cols-2 gap-3 text-xs">
+                <div><strong>Fläche:</strong> 145,8 Hektaren</div>
+                <div><strong>Zu Luzern seit:</strong> 1378</div>
+              </div>
+            </div>
+            
+            <div className="border-l-4 border-yellow-500 pl-4">
+              <h4 className="font-semibold text-yellow-900 dark:text-yellow-100 mb-2">Sonnenberg - 800 m ü.M.</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
+                Wander- und Erholungsgebiet zwischen Kriens und Luzern. Höchster trigonometrischer Punkt 
+                <em> Chrüzhöchi</em> auf 775,7 m ü.M.
+              </p>
+            </div>
+            
+            <div className="border-l-4 border-purple-500 pl-4">
+              <h4 className="font-semibold text-purple-900 dark:text-purple-100 mb-2">Dietschiberg - 684 m ü.M.</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
+                Früher «Kleine Rigi» genannt, liegt am nordöstlichen Rand der Stadt. 
+                Gipfel <em>Hombrig</em> erreicht 684 m ü.M.
+              </p>
+            </div>
+            
+            <div className="border-l-4 border-green-600 pl-4">
+              <h4 className="font-semibold text-green-900 dark:text-green-100 mb-2">Gütsch</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Hügel westlich des Stadtzentrums mit dem Château Gütsch. 
+                Ausgangspunkt für Wanderungen zum Sonnenberg.
+              </p>
+            </div>
+          </div>
+          
+          <div className="mt-4 p-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg">
+            <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Stadtgebiet Übersicht</h4>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Das Zentrum Luzerns liegt zwischen den Naherholungsgebieten Dietschiberg im Nordosten 
+              und Gütsch im Westen. Die Stadt erstreckt sich über 29,1 km² mit vielfältiger Topografie 
+              vom Seeufer bis zu den Berghängen.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
       {/* Urban-Rural Land Use Analysis */}
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">🏙️ Urban-Ländliche Flächenverteilung</h3>

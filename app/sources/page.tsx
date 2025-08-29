@@ -151,6 +151,59 @@ export default function Sources() {
           </div>
         </section>
 
+        {/* Natural Features */}
+        <section className="mb-12">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
+            Natural Features - Luzern
+          </h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="font-medium text-gray-800 dark:text-gray-200 mb-2">Lakes, Rivers & Geography</h3>
+              <ul className="space-y-1 text-sm">
+                <li>• <a href="https://mein-lernen.at/schweiz-ueberblick/schweiz-kanton-luzern-steckbrief/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Kanton Luzern Steckbrief</a></li>
+                <li>• <a href="https://www.luzern.com/de/poi/vierwaldstaettersee" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Luzern.com - Vierwaldstättersee</a></li>
+                <li>• <a href="https://de.wikipedia.org/wiki/Vierwaldst%C3%A4ttersee" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Wikipedia - Vierwaldstättersee</a></li>
+                <li>• <a href="https://de.wikipedia.org/wiki/Luzern" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Wikipedia - Luzern</a></li>
+                <li>• <a href="https://www.luzern.com/de/stadt/sehenswuerdigkeiten/see-berge" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Luzern.com - See & Berge</a></li>
+                <li>• <a href="https://schweizerfluss.ch/reuss/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Schweizerfluss.ch - Reuss</a></li>
+                <li>• <a href="https://de.wikipedia.org/wiki/Reuss_(Fluss)" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Wikipedia - Reuss (Fluss)</a></li>
+                <li>• <a href="https://uwe.lu.ch/themen/gewaesser/seen_und_fliessgewaesser/reuss" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">UWE Luzern - Reuss</a></li>
+                <li>• <a href="https://schweizerfluss.ch/gemeinde/luzern/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Schweizerfluss.ch - Gemeinde Luzern</a></li>
+                <li>• <a href="https://uwe.lu.ch/themen/gewaesser/seen_und_fliessgewaesser/vierwaldstaettersee" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">UWE Luzern - Vierwaldstättersee</a></li>
+                <li>• <a href="https://www.alpenpaesse-wasserscheiden.at/schweiz/rhein-gebiet/reuss-gebiet-flussverlauf/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Alpenpässe - Reuss Gebiet</a></li>
+                <li>• <a href="https://hls-dhs-dss.ch/de/articles/008771/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">HLS - Historisches Lexikon</a></li>
+                <li>• <a href="https://de.wikipedia.org/wiki/Wissenbach_(Reuss)" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Wikipedia - Wissenbach</a></li>
+                <li>• <a href="https://schweizerfluss.ch/kanton/luzern/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Schweizerfluss.ch - Kanton Luzern</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-medium text-gray-800 dark:text-gray-200 mb-2">Mountains, Hills & Recreation</h3>
+              <ul className="space-y-1 text-sm">
+                <li>• <a href="https://de.wikipedia.org/wiki/Exklave_B%C3%BCrgenstock" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Wikipedia - Exklave Bürgenstock</a></li>
+                <li>• <a href="https://de.wikipedia.org/wiki/Sonnenberg_(Kriens)" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Wikipedia - Sonnenberg (Kriens)</a></li>
+                <li>• <a href="https://de.wikipedia.org/wiki/Dietschiberg" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Wikipedia - Dietschiberg</a></li>
+                <li>• <a href="https://hikeanddine.com/de/sonnenberg/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Hike and Dine - Sonnenberg</a></li>
+                <li>• <a href="https://www.luzern.com/de/tour/vom-guetsch-ueber-den-sonnenberg-nach-kriens" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Luzern.com - Gütsch Tour</a></li>
+                <li>• <a href="https://www.luzern.com/de/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Luzern.com - Startseite</a></li>
+                <li>• <a href="https://www.luzern.com/de/highlights/hopping" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Luzern.com - Highlights</a></li>
+                <li>• <a href="https://www.stadtluzern.ch/dienstleistungeninformation/27" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Stadt Luzern - Dienstleistungen</a></li>
+                <li>• <a href="https://www.switzerland-highlights.com/de/ausflugsberge-rund-um-luzern/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Switzerland Highlights - Ausflugsberge</a></li>
+                <li>• <a href="https://de.wikipedia.org/wiki/Pilatus_(Bergmassiv)" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Wikipedia - Pilatus</a></li>
+                <li>• <a href="https://maps.luzern.com/mobile/de/tour/wanderung/vom-guetsch-ueber-den-sonnenberg-nach-kriens/24896587/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Maps Luzern - Gütsch Wanderung</a></li>
+                <li>• <a href="https://www.myswisstrek.ch/zentralschweiz/berge--gipfel/index.php" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">MySwissTrek - Berge & Gipfel</a></li>
+                <li>• <a href="https://www.luzern.com/de/erlebnisregion/ausfluege/ab-auf-den-berg" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Luzern.com - Ab auf den Berg</a></li>
+                <li>• <a href="https://www.prorigi.ch/berg/geographie/geographie-details" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">ProRigi - Geographie Details</a></li>
+                <li>• <a href="https://switzerlanding.com/de/berge-nahe-luzern/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Switzerlanding - Berge nahe Luzern</a></li>
+                <li>• <a href="https://www.nw.ch/schaufensterarchiv/5641" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Nidwalden - Schaufensterarchiv</a></li>
+                <li>• <a href="https://www.outdooractive.com/mobile/de/berggipfel/luzern-vierwaldstaettersee/berggipfel-rund-um-luzern-vierwaldstaettersee/275174615/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">OutdoorActive - Berggipfel</a></li>
+                <li>• <a href="https://www.stadtluzern.ch/_doc/351483" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Stadt Luzern - Dokument</a></li>
+                <li>• <a href="https://www.zentralplus.ch/gesellschaft/exklave-buergenstock-ein-luzerner-kuriosum-am-fusse-des-luxusresorts-1884487/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Zentralplus - Exklave Bürgenstock</a></li>
+                <li>• <a href="https://www.luzerner-wanderwege.ch/de/wandervorschlaege/2829/Rundwanderung-uber-den-Sonneberg" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 hover:underline">Luzerner Wanderwege - Sonnenberg</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
         {/* Business & Economic Data */}
         <section className="mb-12">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
