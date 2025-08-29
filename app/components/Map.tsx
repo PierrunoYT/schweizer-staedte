@@ -26,6 +26,7 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterName
   const [mapReady, setMapReady] = useState(false)
   const [quartierData, setQuartierData] = useState(null)
   const [municipalityData, setMunicipalityData] = useState(null)
+  const [mapInstance, setMapInstance] = useState<string>(() => `map-${Date.now()}`)
   const mapRef = useRef<LeafletMap>(null)
   const markersRef = useRef<L.Marker[]>([]) // Quarter markers
 
@@ -77,6 +78,10 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterName
   }, [showQuarterNames])
 
   useEffect(() => {
+    // Reset map instance when theme changes to prevent reuse errors
+    setMapReady(false)
+    setMapInstance(`map-${theme}-${Date.now()}`)
+    
     // Clear all markers when theme changes
     return () => {
       if (mapRef.current) {
@@ -260,6 +265,7 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterName
         </div>
       ) : (
         <MapContainer
+          key={mapInstance}
           ref={mapRef}
           center={[47.050168, 8.309307]} // Precise center of Luzern city  
           zoom={12}

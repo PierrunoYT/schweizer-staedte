@@ -3,9 +3,9 @@ import Link from 'next/link'
 
 export default function SidePanel() {
   return (
-    <div className="w-80 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-xl border-r border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm transition-colors duration-200">
+    <div className="fixed left-0 top-16 bottom-0 w-80 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-xl border-r border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm transition-colors duration-200 overflow-y-auto z-20 pb-20">
       {/* Header */}
-      <div className="p-6 border-b border-gray-200/50 dark:border-gray-700/50">
+      <div className="p-6 border-b border-gray-200/50 dark:border-gray-700/50 sticky top-0 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 z-10">
         <div className="flex items-center gap-3 mb-2">
           <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center">
             <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

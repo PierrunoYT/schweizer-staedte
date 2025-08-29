@@ -76,10 +76,10 @@ export default function MapContainer() {
   )
 
   return (
-    <div className="flex h-[calc(100vh-73px)]">
+    <>
       <SidePanel />
       
-      <div className="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 relative transition-colors duration-200">
+      <div className="ml-80 h-full bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 relative transition-colors duration-200 pb-20">
         <div className="h-full relative">
           <div className="absolute top-2 right-2 z-50">
             <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
@@ -88,6 +88,6 @@ export default function MapContainer() {
           <Map theme={mapTheme} showQuarters={showQuarters} showQuarterNames={showQuarterNames} showMunicipalities={showMunicipalities} ref={mapRef} />
         </div>
       </div>
-    </div>
+    </>
   )
 }
