@@ -1,36 +1,37 @@
 'use client'
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { searchCities, searchCantons, City } from '../data/cities'
-import { SearchResult } from '../services/geocoding'
-import { searchWithGoogleGeocoding, trackGoogleGeocodingUsage } from '../services/googleGeocoding'
+import { luzernCity } from '../data/cantons/luzern/index'
+
+interface LuzernResult {
+  id: string
+  name: string
+  type: 'city-stats'
+  coordinates: [number, number]
+  stats: any
+}
 
 interface SearchBarProps {
   placeholder?: string
   onCitySelect?: (city: City) => void
-  onAddressSelect?: (address: SearchResult) => void
+  onLuzernSelect?: (result: LuzernResult) => void
   onSearch?: (query: string) => void
   className?: string
 }
 
 export default function SearchBar({ 
-  placeholder = "Search cities, streets, addresses...", 
+  placeholder = "Search cities, cantons, postal codes...", 
   onCitySelect,
-  onAddressSelect,
+  onLuzernSelect,
   onSearch,
   className = ""
 }: SearchBarProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState<City[]>([])
   const [cantonResults, setCantonResults] = useState<string[]>([])
-  const [addressResults, setAddressResults] = useState<SearchResult[]>([])
+  const [luzernResults, setLuzernResults] = useState<LuzernResult[]>([])
   const [showResults, setShowResults] = useState(false)
-  const [isSearching, setIsSearching] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
-  const debounceTimerRef = useRef<NodeJS.Timeout>()
-  const abortControllerRef = useRef<AbortController>()
-  
-  // Simple cache for search results
-  const searchCacheRef = useRef<Map<string, SearchResult[]>>(new Map())
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -42,13 +43,6 @@ export default function SearchBar({
     document.addEventListener('mousedown', handleClickOutside)
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
-      // Cleanup on unmount
-      if (debounceTimerRef.current) {
-        clearTimeout(debounceTimerRef.current)
-      }
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort()
-      }
     }
   }, [])
 
@@ -59,91 +53,46 @@ export default function SearchBar({
     }
   }
 
-  const performSearch = useCallback(async (query: string) => {
+  const performSearch = useCallback((query: string) => {
     const trimmedQuery = query.trim().toLowerCase()
     
-    // Search local cities and cantons (always fast)
+    // Search local cities and cantons
     const cities = searchCities(query)
     const cantons = searchCantons(query)
     
-    // Set local results immediately
+    // Search Luzern data
+    const luzernSearchResults: LuzernResult[] = []
+    if (luzernCity.name.toLowerCase().includes(trimmedQuery) || 
+        trimmedQuery === 'luzern' || 
+        trimmedQuery === 'lucerne' ||
+        luzernCity.postalCode?.includes(trimmedQuery)) {
+      luzernSearchResults.push({
+        id: luzernCity.id,
+        name: `${luzernCity.name} (Statistics)`,
+        type: 'city-stats',
+        coordinates: luzernCity.coordinates,
+        stats: luzernCity.stats
+      })
+    }
+    
+    // Set results
     setSearchResults(cities.slice(0, 5))
     setCantonResults(cantons.slice(0, 3))
-    
-    // Check cache for address results
-    let addresses: SearchResult[] = []
-    if (searchCacheRef.current.has(trimmedQuery)) {
-      addresses = searchCacheRef.current.get(trimmedQuery) || []
-      setAddressResults(addresses.slice(0, 6))
-      setShowResults(true)
-      setIsSearching(false)
-      return
-    }
-    
-    // Cancel previous request
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort()
-    }
-    
-    // Create new abort controller for this request
-    abortControllerRef.current = new AbortController()
-    
-    try {
-      // Search addresses via Google Geocoding (with Nominatim fallback)
-      addresses = await searchWithGoogleGeocoding(query, abortControllerRef.current.signal)
-      
-      // Track usage for monitoring
-      trackGoogleGeocodingUsage()
-      
-      // Cache the results
-      searchCacheRef.current.set(trimmedQuery, addresses)
-      
-      // Limit cache size to prevent memory issues
-      if (searchCacheRef.current.size > 50) {
-        const firstKey = searchCacheRef.current.keys().next().value
-        searchCacheRef.current.delete(firstKey)
-      }
-      
-      setAddressResults(addresses.slice(0, 6))
-    } catch (error) {
-      if ((error as Error).name !== 'AbortError') {
-        console.error('Search error:', error)
-        setAddressResults([])
-      }
-    } finally {
-      setShowResults(true)
-      setIsSearching(false)
-    }
+    setLuzernResults(luzernSearchResults)
+    setShowResults(true)
   }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value
     setSearchQuery(query)
     
-    // Clear previous debounce timer
-    if (debounceTimerRef.current) {
-      clearTimeout(debounceTimerRef.current)
-    }
-    
     if (query.trim().length >= 2) {
-      setIsSearching(true)
-      setShowResults(true)
-      
-      // Debounce the search to reduce API calls
-      debounceTimerRef.current = setTimeout(() => {
-        performSearch(query)
-      }, 300) // 300ms delay
+      performSearch(query)
     } else {
       setSearchResults([])
       setCantonResults([])
-      setAddressResults([])
+      setLuzernResults([])
       setShowResults(false)
-      setIsSearching(false)
-      
-      // Cancel any pending search
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort()
-      }
     }
   }
 
@@ -163,11 +112,11 @@ export default function SearchBar({
     }
   }
 
-  const handleAddressClick = (address: SearchResult) => {
-    setSearchQuery(address.name)
+  const handleLuzernClick = (result: LuzernResult) => {
+    setSearchQuery(result.name)
     setShowResults(false)
-    if (onAddressSelect) {
-      onAddressSelect(address)
+    if (onLuzernSelect) {
+      onLuzernSelect(result)
     }
   }
 
@@ -205,16 +154,10 @@ export default function SearchBar({
       </form>
 
       {/* Search Results Dropdown */}
-      {showResults && (searchResults.length > 0 || cantonResults.length > 0 || addressResults.length > 0 || isSearching) && (
+      {showResults && (searchResults.length > 0 || cantonResults.length > 0 || luzernResults.length > 0) && (
         <div className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-sm border border-gray-200 rounded-xl shadow-xl z-50 max-h-80 overflow-y-auto mt-2">
-          {isSearching && (
-            <div className="px-4 py-4 text-center text-sm text-gray-600">
-              <div className="animate-spin inline-block w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full mr-3"></div>
-              <span className="font-medium">Searching Switzerland...</span>
-            </div>
-          )}
 
-          {!isSearching && cantonResults.length > 0 && (
+          {cantonResults.length > 0 && (
             <div>
               <div className="px-4 py-3 text-xs font-bold text-gray-700 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-100 uppercase tracking-wider">
                 🏛️ Cantons
@@ -232,7 +175,7 @@ export default function SearchBar({
             </div>
           )}
 
-          {!isSearching && searchResults.length > 0 && (
+          {searchResults.length > 0 && (
             <div>
               <div className="px-4 py-3 text-xs font-bold text-gray-700 bg-gradient-to-r from-green-50 to-emerald-50 border-b border-green-100 uppercase tracking-wider">
                 🏙️ Major Cities
@@ -252,28 +195,28 @@ export default function SearchBar({
             </div>
           )}
 
-          {!isSearching && addressResults.length > 0 && (
+          {luzernResults.length > 0 && (
             <div>
-              <div className="px-4 py-3 text-xs font-bold text-gray-700 bg-gradient-to-r from-purple-50 to-pink-50 border-b border-purple-100 uppercase tracking-wider">
-                📍 Addresses & Places
+              <div className="px-4 py-3 text-xs font-bold text-gray-700 bg-gradient-to-r from-orange-50 to-red-50 border-b border-orange-100 uppercase tracking-wider">
+                📊 Luzern Statistics
               </div>
-              {addressResults.map((address) => (
+              {luzernResults.map((result) => (
                 <button
-                  key={address.id}
-                  onClick={() => handleAddressClick(address)}
-                  className="w-full px-4 py-3 text-left hover:bg-purple-50 border-b border-gray-100 last:border-b-0 transition-colors duration-150 group"
+                  key={result.id}
+                  onClick={() => handleLuzernClick(result)}
+                  className="w-full px-4 py-3 text-left hover:bg-orange-50 border-b border-gray-100 last:border-b-0 transition-colors duration-150 group"
                 >
-                  <div className="font-semibold text-gray-900 group-hover:text-purple-900">{address.name}</div>
-                  <div className="text-sm text-gray-600 group-hover:text-purple-700 truncate flex items-center">
-                    <span className="inline-block w-2 h-2 bg-purple-400 rounded-full mr-2 group-hover:bg-purple-600"></span>
-                    {address.description}
+                  <div className="font-semibold text-gray-900 group-hover:text-orange-900">{result.name}</div>
+                  <div className="text-sm text-gray-600 group-hover:text-orange-700 flex items-center">
+                    <span className="inline-block w-2 h-2 bg-orange-400 rounded-full mr-2 group-hover:bg-orange-600"></span>
+                    Population: {result.stats.population.toLocaleString()} • Area: {result.stats.area} km²
                   </div>
                 </button>
               ))}
             </div>
           )}
 
-          {!isSearching && searchResults.length === 0 && cantonResults.length === 0 && addressResults.length === 0 && (
+          {searchResults.length === 0 && cantonResults.length === 0 && luzernResults.length === 0 && (
             <div className="px-4 py-6 text-center">
               <div className="text-gray-400 mb-2">
                 <svg className="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -281,7 +224,7 @@ export default function SearchBar({
                 </svg>
               </div>
               <div className="text-sm font-medium text-gray-500">No results found</div>
-              <div className="text-xs text-gray-400 mt-1">Try searching for cities, streets, or landmarks</div>
+              <div className="text-xs text-gray-400 mt-1">Try searching for cities, cantons, or postal codes</div>
             </div>
           )}
         </div>

@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 import SidePanel from './SidePanel'
 import SearchBar from './SearchBar'
 import { City } from '../data/cities'
-import { SearchResult } from '../services/geocoding'
 import ThemeToggle from './ThemeToggle'
 import QuarterToggle from './QuarterToggle'
 import ZoomControls from './ZoomControls'
@@ -25,7 +24,7 @@ export default function MapContainer() {
   const [searchMarker, setSearchMarker] = useState<{
     coordinates: [number, number]
     label: string
-    type: 'city' | 'address' | 'poi'
+    type: 'city' | 'city-stats'
   } | undefined>(undefined)
   const mapRef = useRef<MapRef>(null)
 
@@ -51,25 +50,22 @@ export default function MapContainer() {
     }, 100)
   }
 
-  const handleAddressSelect = (address: SearchResult) => {
-    console.log('Selected address:', address, 'Map ref:', mapRef.current)
+  const handleLuzernSelect = (result: any) => {
+    console.log('Selected Luzern result:', result, 'Map ref:', mapRef.current)
     
-    // Set search marker
+    // Set search marker with round marker for statistical data
     setSearchMarker({
-      coordinates: address.coordinates,
-      label: address.name,
-      type: address.type === 'street' ? 'address' : address.type === 'poi' ? 'poi' : 'address'
+      coordinates: result.coordinates,
+      label: result.name,
+      type: 'city-stats'
     })
     
     // Add a small delay to ensure map is ready
     setTimeout(() => {
       if (mapRef.current) {
-        console.log('Attempting to pan to address:', address.coordinates)
-        // Pan to selected address with appropriate zoom level based on type
-        const zoomLevel = address.type === 'address' ? 16 : 
-                         address.type === 'street' ? 15 : 
-                         address.type === 'poi' ? 16 : 13
-        mapRef.current.panTo(address.coordinates, zoomLevel)
+        console.log('Attempting to pan to Luzern:', result.coordinates)
+        // Pan to Luzern with city view zoom
+        mapRef.current.panTo(result.coordinates, 13)
       } else {
         console.log('Map ref is still not available after timeout')
       }
@@ -152,7 +148,7 @@ export default function MapContainer() {
       <SidePanel mapControls={mapControls}>
         <SearchBar 
           onCitySelect={handleCitySelect} 
-          onAddressSelect={handleAddressSelect}
+          onLuzernSelect={handleLuzernSelect}
           onSearch={handleSearch} 
         />
       </SidePanel>
