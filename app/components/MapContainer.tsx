@@ -89,7 +89,7 @@ export default function MapContainer({ isSidePanelOpen, onSidePanelClose }: MapC
           <div className="absolute top-2 right-2 md:top-4 md:right-4 z-50">
             <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
           </div>
-          <div className="absolute bottom-20 left-2 md:bottom-2 md:left-0 z-50">
+          <div className="absolute bottom-16 left-2 sm:bottom-20 md:bottom-2 md:left-0 z-50">
             <MapControlsDropdown mapControls={mapControls} theme={mapTheme} />
           </div>
           <Map theme={mapTheme} showQuarters={showQuarters} showQuarterNames={showQuarterNames} showMunicipalities={showMunicipalities} ref={mapRef} />

@@ -269,12 +269,20 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterName
           style={{ height: '100%', width: '100%' }}
           scrollWheelZoom={true}
           zoomControl={false} // Disable default zoom controls to avoid conflicts
-          whenReady={() => {
+          whenReady={(map) => {
             console.log('Map is ready!')
-            // Add a small delay to ensure panes are fully initialized
-            setTimeout(() => {
-              setMapReady(true)
-            }, 100)
+            // Ensure panes are fully initialized before allowing tile layer
+            const mapInstance = map.target
+            if (mapInstance && mapInstance.getPane('tilePane')) {
+              setTimeout(() => {
+                setMapReady(true)
+              }, 200)
+            } else {
+              // Fallback with longer delay if panes aren't ready
+              setTimeout(() => {
+                setMapReady(true)
+              }, 500)
+            }
           }}
         >
           {mapReady && (
