@@ -1,9 +1,25 @@
 'use client'
 import Link from 'next/link'
 
-export default function SidePanel() {
+interface SidePanelProps {
+  isOpen: boolean
+  onClose: () => void
+}
+
+export default function SidePanel({ isOpen, onClose }: SidePanelProps) {
   return (
-    <div className="fixed left-0 top-16 bottom-0 w-80 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-xl border-r border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm transition-colors duration-200 overflow-y-auto z-20 pb-20">
+    <>
+      {/* Mobile overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          onClick={onClose}
+        />
+      )}
+      
+      <div className={`fixed left-0 top-20 bottom-0 w-80 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-xl border-r border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm transition-all duration-300 overflow-y-auto z-50 pb-20 ${
+        isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      }`}>
       {/* Header */}
       <div className="p-6 border-b border-gray-200/50 dark:border-gray-700/50 sticky top-0 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 z-10">
         <div className="flex items-center gap-3 mb-2">
@@ -175,6 +191,7 @@ export default function SidePanel() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   )
 }

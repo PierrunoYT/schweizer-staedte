@@ -19,7 +19,12 @@ interface MapRef {
   panTo: (coordinates: [number, number], zoom?: number) => void
 }
 
-export default function MapContainer() {
+interface MapContainerProps {
+  isSidePanelOpen: boolean
+  onSidePanelClose: () => void
+}
+
+export default function MapContainer({ isSidePanelOpen, onSidePanelClose }: MapContainerProps) {
   const [mapTheme, setMapTheme] = useState<MapTheme>('neutral')
   const [showQuarters, setShowQuarters] = useState(true)
   const [showQuarterNames, setShowQuarterNames] = useState(true)
@@ -77,9 +82,9 @@ export default function MapContainer() {
 
   return (
     <>
-      <SidePanel />
+      <SidePanel isOpen={isSidePanelOpen} onClose={onSidePanelClose} />
       
-      <div className="ml-80 h-full bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 relative transition-colors duration-200 pb-20">
+      <div className="md:ml-80 h-full bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 relative transition-colors duration-200 pb-20">
         <div className="h-full relative">
           <div className="absolute top-2 right-2 z-50">
             <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
