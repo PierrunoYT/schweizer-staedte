@@ -34,7 +34,7 @@ export default function MapControlsDropdown({ mapControls, theme = 'neutral' }: 
     : 'shadow-xl shadow-gray-900/15'
 
   return (
-    <div className="absolute bottom-4 left-4 z-50">
+    <div className="relative z-50">
       {/* Dropdown panel */}
       {isOpen && (
         <div 
@@ -44,7 +44,7 @@ export default function MapControlsDropdown({ mapControls, theme = 'neutral' }: 
             transition-all duration-200 ease-in-out
             transform origin-bottom-left
             animate-in slide-in-from-bottom-2 fade-in-0
-            min-w-[280px] max-w-[320px]
+            min-w-[260px] max-w-[280px] md:min-w-[280px] md:max-w-[320px]
           `}
         >
           <div className="mb-3">
