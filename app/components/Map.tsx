@@ -269,7 +269,7 @@ const Map = forwardRef<MapRef, MapProps>(({ theme, showQuarters, showQuarterName
           style={{ height: '100%', width: '100%' }}
           scrollWheelZoom={true}
           zoomControl={false} // Disable default zoom controls to avoid conflicts
-          whenReady={(map) => {
+          whenReady={() => {
             console.log('Map is ready!')
             // Add a small delay to ensure panes are fully initialized
             setTimeout(() => {

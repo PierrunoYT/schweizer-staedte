@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -5,7 +6,7 @@ import Footer from '../components/Footer'
 export default function Sources() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
-      <Header />
+      <Header onMenuToggle={() => {}} />
       <div className="max-w-4xl mx-auto px-6 py-8 pb-24">
         <Link 
           href="/"
