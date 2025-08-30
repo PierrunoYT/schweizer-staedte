@@ -137,8 +137,14 @@ export default function SidePanel({ isOpen, onClose }: SidePanelProps) {
               <img 
                 src="/switzerland.svg" 
                 alt="Switzerland" 
-                className="h-16 flex-shrink-0 opacity-90"
-                style={{ display: 'block', objectFit: 'contain' }}
+                className="w-20 h-16 flex-shrink-0 opacity-90 block dark:hidden"
+                style={{ objectFit: 'contain' }}
+              />
+              <img 
+                src="/switzerlandwhite.svg" 
+                alt="Switzerland" 
+                className="w-20 h-16 flex-shrink-0 opacity-90 hidden dark:block"
+                style={{ objectFit: 'contain', transform: 'scale(1.8)' }}
               />
             </div>
             <div className="mt-2 text-center">

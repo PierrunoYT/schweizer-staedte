@@ -21,8 +21,14 @@ export default function Header({ onMenuToggle }: HeaderProps) {
           <img 
             src="/switzerland.svg" 
             alt="Switzerland" 
-            className="h-12 flex-shrink-0"
-            style={{ display: 'block', objectFit: 'contain' }}
+            className="w-16 h-12 flex-shrink-0 block dark:hidden"
+            style={{ objectFit: 'contain' }}
+          />
+          <img 
+            src="/switzerlandwhite.svg" 
+            alt="Switzerland" 
+            className="w-16 h-12 flex-shrink-0 hidden dark:block"
+            style={{ objectFit: 'contain', transform: 'scale(1.8)' }}
           />
           <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
             <span className="hidden sm:inline">Swiss </span>Cities
