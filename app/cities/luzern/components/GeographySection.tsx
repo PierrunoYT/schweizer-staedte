@@ -3,7 +3,7 @@ import { luzernCity } from '../data'
 export default function GeographySection() {
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">🏔️ Topografie & Lage</h3>
           <div className="space-y-3">
@@ -61,7 +61,7 @@ export default function GeographySection() {
               <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
                 Das bedeutendste Gewässer der Stadt Luzern. Die Stadt liegt am nordwestlichen Ufer beim Ausfluss der Reuss.
               </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
                 <div>
                   <span className="font-medium text-gray-900 dark:text-white">Fläche:</span>
                   <br />114 km²
@@ -113,7 +113,7 @@ export default function GeographySection() {
 
             <div>
               <h4 className="font-medium text-gray-900 dark:text-white mb-2">Weitere Gewässer</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm">
                 <div className="space-y-1">
                   <div><strong>Krienbach:</strong> Lokaler Bach durch das Stadtgebiet</div>
                   <div><strong>Rotbach (Rothenburg):</strong> 20 km Länge</div>
@@ -188,7 +188,7 @@ export default function GeographySection() {
       {/* Urban-Rural Land Use Analysis */}
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">🏙️ Urban-Ländliche Flächenverteilung</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div>
             <h4 className="font-medium text-gray-900 dark:text-white mb-3">Hauptkategorien</h4>
             <div className="space-y-3">
@@ -255,7 +255,7 @@ export default function GeographySection() {
       {/* Settlement Development Trends */}
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">📈 Siedlungsentwicklung (1982-2016)</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <h4 className="font-medium text-gray-900 dark:text-white mb-3">Historische Entwicklung</h4>
             <div className="space-y-3">
@@ -303,7 +303,7 @@ export default function GeographySection() {
       {/* Climate Data */}
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">🌿 Klimadaten & Temperaturen</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <h4 className="font-medium text-gray-900 dark:text-white mb-3">Jährliche Klimatage</h4>
             <div className="space-y-2">

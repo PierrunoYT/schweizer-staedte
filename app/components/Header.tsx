@@ -24,8 +24,8 @@ export default function Header({ onMenuToggle }: HeaderProps) {
             className="h-12 flex-shrink-0"
             style={{ display: 'block', objectFit: 'contain' }}
           />
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Swiss Cities
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+            <span className="hidden sm:inline">Swiss </span>Cities
           </h1>
         </div>
         <HeaderThemeToggle />

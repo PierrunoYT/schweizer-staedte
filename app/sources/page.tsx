@@ -23,7 +23,7 @@ export default function Sources() {
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
             Official Statistics
           </h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 gap-6">
             <div>
               <h3 className="font-medium text-gray-800 dark:text-gray-200 mb-2">LUSTAT Statistik Luzern</h3>
               <ul className="space-y-1 text-sm">
@@ -105,7 +105,7 @@ export default function Sources() {
           </h2>
           
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 gap-6">
             <div>
               <h3 className="font-medium text-gray-800 dark:text-gray-200 mb-2">GIS & Mapping</h3>
               <ul className="space-y-1 text-sm">
@@ -159,7 +159,7 @@ export default function Sources() {
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
             Natural Features - Luzern
           </h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 gap-6">
             <div>
               <h3 className="font-medium text-gray-800 dark:text-gray-200 mb-2">Lakes, Rivers & Geography</h3>
               <ul className="space-y-1 text-sm">
@@ -229,7 +229,7 @@ export default function Sources() {
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 border-b border-gray-200 dark:border-gray-700 pb-2">
             Historical & Academic Sources
           </h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 gap-6">
             <div>
               <h3 className="font-medium text-gray-800 dark:text-gray-200 mb-2">Archives & History</h3>
               <ul className="space-y-1 text-sm">

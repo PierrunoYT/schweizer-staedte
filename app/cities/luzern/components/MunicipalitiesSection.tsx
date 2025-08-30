@@ -9,7 +9,7 @@ export default function MunicipalitiesSection() {
         <p className="text-gray-600 dark:text-gray-400 mb-6">
           Entdecken Sie die umliegenden Gemeinden im Kanton Luzern in der Nähe der Stadt Luzern.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {luzernMunicipalities
             .filter(m => m.name !== 'Luzern')
             .map((municipality, index) => {

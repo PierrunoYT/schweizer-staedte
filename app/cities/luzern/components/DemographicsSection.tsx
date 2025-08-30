@@ -3,7 +3,7 @@ import { luzernCity } from '../data'
 export default function DemographicsSection() {
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800/30">
           <div className="text-2xl font-bold text-blue-900 dark:text-blue-100">{luzernCity.stats.demographics.swissPopulation.toLocaleString()}</div>
           <div className="text-sm text-blue-800 dark:text-blue-200">Schweizer Bürger</div>
@@ -18,7 +18,7 @@ export default function DemographicsSection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">👥 Bevölkerungsstruktur</h3>
           <div className="space-y-3">
@@ -62,7 +62,7 @@ export default function DemographicsSection() {
 
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">🌍 Hauptnationalitäten (Ausländer)</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {luzernCity.stats.demographics.majorNationalities.map((nationality, index) => (
             <div key={index} className="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
               <div className="text-lg font-bold text-gray-900 dark:text-white">{nationality.percentage}%</div>

@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
+import Footer from '../../components/Footer'
 
 // Import all section components
 import OverviewSection from './components/OverviewSection'
@@ -117,7 +118,7 @@ export default function LuzernPage() {
           
           {/* Mobile Dropdown Menu */}
           {isMobileMenuOpen && (
-            <div className="mt-2 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div className="mt-2 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden max-h-80 overflow-y-auto">
               {sections.map((section) => (
                 <button
                   key={section.id}
@@ -169,6 +170,7 @@ export default function LuzernPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

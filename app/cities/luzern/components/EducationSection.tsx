@@ -3,7 +3,7 @@ import { luzernCity } from '../data'
 export default function EducationSection() {
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800/30">
           <div className="text-2xl font-bold text-blue-900 dark:text-blue-100">{luzernCity.stats.education.hsluStudents.toLocaleString()}</div>
           <div className="text-sm text-blue-800 dark:text-blue-200">HSLU Studierende</div>
@@ -23,7 +23,7 @@ export default function EducationSection() {
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Mit {luzernCity.stats.education.hsluStudents.toLocaleString()} Studierenden ist die HSLU die grösste Bildungsinstitution der Zentralschweiz.
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {luzernCity.stats.education.hsluDepartments.map((department, index) => (
             <div key={index} className="flex items-center gap-2 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
               <div className="text-lg">📚</div>
@@ -33,7 +33,7 @@ export default function EducationSection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">🏫 Bildungseinrichtungen</h3>
           <div className="space-y-4">

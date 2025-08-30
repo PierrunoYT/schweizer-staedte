@@ -9,7 +9,7 @@ export default function DistrictsSection() {
       <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
         <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">Stadtgliederung</h3>
         <p className="text-blue-800 dark:text-blue-200 mb-4">{administrativeStructure.description}</p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">{administrativeStructure.totalCityDistricts}</div>
             <div className="text-sm text-blue-700 dark:text-blue-300">Stadtteile</div>
@@ -29,7 +29,7 @@ export default function DistrictsSection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {stadtteile.map((stadtteil, index) => (
           <div key={index} className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
             <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{stadtteil.name}</h3>
@@ -61,7 +61,7 @@ export default function DistrictsSection() {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
               {stadtkreis.quartiers.map((quartier, index) => {
                 const quarterData = quartiers.find(q => q.name === quartier)
                 return (
@@ -120,7 +120,7 @@ export default function DistrictsSection() {
 
   const renderRankings = () => (
     <div className="space-y-8">
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid sm:grid-cols-2 gap-8">
         <div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
             🏆 Top 5 Quartiere
@@ -181,7 +181,7 @@ export default function DistrictsSection() {
         <p className="text-blue-800 dark:text-blue-200 mb-4">
           Stadt Luzern zählt {administrativeStructure.totalPopulation.toLocaleString('de-CH')} Einwohner (Stand {administrativeStructure.populationDataYear}).
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
           <div>
             <div className="font-semibold text-blue-900 dark:text-blue-100">Größtes Quartier:</div>
             <div className="text-blue-700 dark:text-blue-300">Neustadt / Voltastrasse</div>

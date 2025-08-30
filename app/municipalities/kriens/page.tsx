@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { luzernMunicipalities } from '../../cities/luzern/data'
+import Footer from '../../components/Footer'
 
 export default function KriensPage() {
   const municipality = luzernMunicipalities.find(m => m.name === 'Kriens')
@@ -31,8 +32,8 @@ export default function KriensPage() {
                 Kanton Luzern
               </Link>
               <span className="text-gray-400">›</span>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                🏘️ {municipality.name}
+              <h1 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2 truncate">
+                🏘️ <span className="truncate">{municipality.name}</span>
               </h1>
             </div>
             <Link 
@@ -140,6 +141,7 @@ export default function KriensPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

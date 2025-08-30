@@ -16,7 +16,7 @@ export default function Home() {
           onSidePanelClose={() => setIsSidePanelOpen(false)}
         />
       </div>
-      <Footer />
+      <Footer hasFixedSidebar={true} />
     </div>
   )
 }

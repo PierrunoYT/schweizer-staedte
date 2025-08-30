@@ -1,6 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { luzernMunicipalities } from '../../cities/luzern/data'
+import Footer from '../../components/Footer'
 
 export default function EmmenPage() {
   const municipality = luzernMunicipalities.find(m => m.name === 'Emmen')
@@ -31,8 +32,8 @@ export default function EmmenPage() {
                 Kanton Luzern
               </Link>
               <span className="text-gray-400">›</span>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-                🏘️ {municipality.name}
+              <h1 className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2 truncate">
+                🏘️ <span className="truncate">{municipality.name}</span>
               </h1>
             </div>
             <Link 
@@ -52,7 +53,7 @@ export default function EmmenPage() {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="space-y-8">
           {/* Overview Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800/30">
               <div className="text-3xl font-bold text-blue-900 dark:text-blue-100">{municipality.population.toLocaleString()}</div>
               <div className="text-sm text-blue-800 dark:text-blue-200">Einwohner</div>
@@ -76,7 +77,7 @@ export default function EmmenPage() {
               eine wichtige Wohngemeinde in der Region.
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Basisdaten</h3>
                 <div className="space-y-2">
@@ -116,7 +117,7 @@ export default function EmmenPage() {
           {/* Navigation to other municipalities */}
           <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Andere Gemeinden im Kanton Luzern</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
               {luzernMunicipalities
                 .filter(m => m.name !== municipality.name)
                 .map((otherMunicipality, index) => {
@@ -140,6 +141,7 @@ export default function EmmenPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

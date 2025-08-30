@@ -3,7 +3,7 @@ import { luzernCity } from '../data'
 export default function EconomySection() {
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg border border-green-200 dark:border-green-800/30">
           <div className="text-2xl font-bold text-green-900 dark:text-green-100">{luzernCity.stats.economy.totalCompanies.toLocaleString()}</div>
           <div className="text-sm text-green-800 dark:text-green-200">Unternehmen (Kanton)</div>
@@ -22,7 +22,7 @@ export default function EconomySection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">💰 Wirtschaftsdaten</h3>
           <div className="space-y-3">
@@ -70,7 +70,7 @@ export default function EconomySection() {
 
       <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">🏭 Hauptwirtschaftssektoren</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {luzernCity.stats.economicSectors.map((sector, index) => (
             <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
               <div className="w-3 h-3 bg-green-500 rounded-full"></div>
