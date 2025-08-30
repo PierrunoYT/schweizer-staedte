@@ -4,7 +4,7 @@ import { luzernCity } from '../data'
 export default function OverviewSection() {
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800/30">
           <div className="text-2xl font-bold text-blue-900 dark:text-blue-100">{luzernCity.stats.population.toLocaleString()}</div>
           <div className="text-sm text-blue-800 dark:text-blue-200">Einwohner (2024)</div>
@@ -24,7 +24,7 @@ export default function OverviewSection() {
       </div>
 
       {/* Additional Administrative Information */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <div className="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="text-lg font-bold text-gray-900 dark:text-gray-100">BFS-Nr. {luzernCity.stats.bfsNumber}</div>
           <div className="text-sm text-gray-600 dark:text-gray-400">Offizielle Gemeindenummer</div>
